@@ -21,7 +21,7 @@ public class ItemController {
         return itemService.addItem(item);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
