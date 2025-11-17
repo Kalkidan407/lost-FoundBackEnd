@@ -41,5 +41,8 @@ public class ItemController {
     itemService.deleteAllItems();
   }
 
-   
+  @PutMapping("/{id}")
+  public Item updateItem(@PathVariable Long id, @RequestBody Item updatedItem){
+    return itemService.updateItem(id, updatedItem);
+  }
 }
