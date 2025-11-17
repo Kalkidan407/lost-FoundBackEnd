@@ -44,7 +44,7 @@ public class LocationService {
                 item.setLatitude(updateedLocation.getLatitude());
                 item.setLongitude(updateedLocation.getLongitude());
                 return locationRepository.save(item);
-            }).orElseThrow(() -> new RuntimeException("Location not found with id:" + id));
+            }).orElseThrow(() -> new RuntimeException("Location not found with id      :" + id));
     }
 
 
