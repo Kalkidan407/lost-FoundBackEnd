@@ -39,7 +39,6 @@ private User user;
     @Column(nullable = false, unique = true)
     private String name;
 
-
  
     @Column(nullable = false,  length = 2000,unique = true)
     private String description;
@@ -52,8 +51,6 @@ private User user;
 
      @Column(nullable = false, unique = true)
     private boolean status;
-
-
 
 
     @ManyToOne

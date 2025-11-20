@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Table(name ="categories")
 public class Category {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
