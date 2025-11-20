@@ -2,9 +2,12 @@ package com.lostfound.lostfound.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,7 +37,10 @@ public class User {
      private String role;
 
 
- @OneToMany(mappedBy = "user",  cascade =  CascadeType.PERSIST)
+
+// No cascade REMOVE: we don't want deleting user to delete items  
+ @OneToMany(mappedBy = "user",  fetch = FetchType.LAZY)
+@JsonIgnore // to prevent recursion when serializing user  
  private List<Item> items;
 
  @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
