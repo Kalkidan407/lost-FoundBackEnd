@@ -25,7 +25,7 @@ private final UserService userService;
 
 
 @PostMapping
-  public User createUser(@RequestBody User user){
+  public User createUser(@Valid @RequestBody User user){
     return userService.createUser(user);
   }
 

@@ -1,52 +1,55 @@
 package com.lostfound.lostfound.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-import com.lostfound.lostfound.model.Item;
-import com.lostfound.lostfound.repository.ItemRepository;
-import lombok.RequiredArgsConstructor;
-
-@Service
+public @Service
 @RequiredArgsConstructor
 public class ItemService {
+    private final ItemRepository itemRepo;
+    private final UserRepository userRepo;
+    private final CategoryRepository categoryRepo;
+    private final LocationRepository locationRepo;
 
-    private final ItemRepository itemRepository;
+    public ItemResponse create(ItemRequest req) {
+        Item item = new Item();
+        item.setName(req.getName());
+        item.setDescription(req.getDescription());
+        item.setPhotoUrl(req.getPhotoUrl());
+        item.setStatus(false);
 
-    public List<Item> getAllItems() {
-        return itemRepository.findAll();
+        // link user
+        if (req.getUserId() != null) {
+            User user = userRepo.findById(req.getUserId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+            item.setUser(user);
+        }
+
+        // link category
+        if (req.getCategoryId() != null) {
+            Category cat = categoryRepo.findById(req.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
+            item.setCategory(cat);
+        }
+
+        // link location
+        if (req.getLocationId() != null) {
+            Location loc = locationRepo.findById(req.getLocationId())
+                .orElseThrow(() -> new ResourceNotFoundException("Location not found"));
+            item.setLocation(loc);
+        }
+
+        Item saved = itemRepo.save(item);
+        return toResponse(saved);
     }
 
-
-    public Item addItem(Item item) {
-        return itemRepository.save(item);
+    private ItemResponse toResponse(Item it) {
+        ItemResponse r = new ItemResponse();
+        r.setId(it.getId());
+        r.setName(it.getName());
+        r.setDescription(it.getDescription());
+        r.setPhotoUrl(it.getPhotoUrl());
+        r.setStatus(it.isStatus());
+        r.setUserId(it.getUser() != null ? it.getUser().getId() : null);
+        r.setCategoryId(it.getCategory() != null ? it.getCategory().getId() : null);
+        r.setLocationId(it.getLocation() != null ? it.getLocation().getId() : null);
+        return r;
     }
-
-    public Optional<Item> getItemById(Long id) {
-    return itemRepository.findById(id);
-}
-
-
-    public void deleteItemById(Long id){
-      itemRepository.deleteById(id);
-    }
-    public void deleteAllItems(){
-      itemRepository.deleteAll();
-    }
-
-    public Item updateItem(Long id, Item updatedItem){
-      return itemRepository.findById(id)
-        .map(item -> {
-           item.setName(updatedItem.getName());
-           item.setDescription(updatedItem.getDescription());
-           item.setLocationFound(updatedItem.getLocationFound());
-           item.setPhotoUrl(updatedItem.getPhotoUrl());
-            item.setStatus(updatedItem.isStatus());
-    return itemRepository.save(item);
-
-        }).orElseThrow(() -> new RuntimeException("Item not found with id: " + id));
-    }
-
-
 }

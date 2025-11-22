@@ -13,14 +13,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Setter
 @Getter
 @Table(name ="users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,11 +46,11 @@ public class User {
 
 
 // No cascade REMOVE: we don't want deleting user to delete items  
- @OneToMany(mappedBy = "user",  fetch = FetchType.LAZY)
-@JsonIgnore // to prevent recursion when serializing user  
- private List<Item> items;
+   @OneToMany(mappedBy = "user",  fetch = FetchType.LAZY)
+   @JsonIgnore // to prevent recursion when serializing user  
+   private List<Item> items;
 
- @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+ @OneToMany(mappedBy = "user", cascade = CascadeType.LAZY)
  private List<Report> reports;
 
 

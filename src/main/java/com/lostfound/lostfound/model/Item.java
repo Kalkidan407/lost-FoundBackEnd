@@ -13,6 +13,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
@@ -30,17 +31,32 @@ public class Item {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
- @ManyToOne
+ @ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name = "user_id")
 @OnDelete(action = OnDeleteAction.SET_NULL)
 private User user;
+
+
+  @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    @JsonIgnore
+    private Location location;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Report> reports;
+
 
 
     @Column(nullable = false, unique = true)
     private String name;
 
  
-    @Column(nullable = false,  length = 2000,unique = true)
+    @Column(nullable = false,  length = 2000)
     private String description;
 
    @Column(nullable = false, unique = true)
@@ -53,15 +69,6 @@ private User user;
     private boolean status;
 
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    @ManyToOne
-    @JoinColumn(name = "location_id")
-    private Location location;
-
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<Report> reports;
+  
   
 }
