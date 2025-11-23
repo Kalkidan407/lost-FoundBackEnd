@@ -14,4 +14,8 @@ public class ItemResponse {
     private Long userId;
     private Long categoryId;
     private Long locationId;
+    private String locationName;
+     private Long reportId;
+     private String categoryName;
+     private String reportedBy;
 }

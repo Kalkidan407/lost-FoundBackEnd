@@ -49,7 +49,7 @@ public class LocationController {
         locationService.deleteAllLocations();
     }
 
-    @PutMapping("/{id}")  
+    @PutMapping("/update/{id}")  
     public Location updateLocation(@PathVariable Long id, @RequestBody Location updatedLocation){
         return locationService.updateLocation(id, updatedLocation);
     }

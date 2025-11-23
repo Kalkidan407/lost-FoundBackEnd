@@ -20,10 +20,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Setter
-@Getter
+
 @Table(name ="users")
 @Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -50,7 +51,7 @@ public class User {
    @JsonIgnore // to prevent recursion when serializing user  
    private List<Item> items;
 
- @OneToMany(mappedBy = "user", cascade = CascadeType.LAZY)
+ @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
  private List<Report> reports;
 
 

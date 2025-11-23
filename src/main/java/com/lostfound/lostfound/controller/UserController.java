@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.service.UserService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController

@@ -1,48 +1,65 @@
 package com.lostfound.lostfound.controller;
 
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import com.lostfound.lostfound.model.Item;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.lostfound.lostfound.dto.ItemRequest;
+import com.lostfound.lostfound.dto.ItemResponse;
+
 import com.lostfound.lostfound.service.ItemService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-
-@RestController
-@RequestMapping("/api/items")
+@RestController 
 @RequiredArgsConstructor
+@RequestMapping("/api/items")
+
+
 public class ItemController {
 
     private final ItemService itemService;
 
     @PostMapping("/create")
-    public Item createItem(@RequestBody Item item) {
-        return itemService.addItem(item);
+    public ResponseEntity<ItemResponse> addItem(@RequestBody ItemRequest dto) {
+        ItemResponse created = itemService.addItem(dto);
+
+        return ResponseEntity.ok(created);
     }
 
-    @GetMapping()
-    public List<Item> getAllItems() {
-        return itemService.getAllItems();
+  
+    @GetMapping
+    public ResponseEntity<List<ItemResponse>> getAllItems() {
+        return ResponseEntity.ok(itemService.getAllItems());
     }
 
-   @GetMapping("/{id}")
-  public Item getItemById(@PathVariable Long id){
-    return itemService.getItemById(id)
-         .orElseThrow(() -> new RuntimeException("Item not found with id: " + id));
-  }
 
-  @DeleteMapping("/{id}")
-  public void deleteItemById(@PathVariable Long id){
-    itemService.deleteItemById(id);
-  }
-  @DeleteMapping
-  public void deleteAllItems(){
-    itemService.deleteAllItems();
-  }
+    @GetMapping("/{id}")
+    public ResponseEntity<ItemResponse> getItemById(@PathVariable Long id) {
+        return ResponseEntity.ok(itemService.getItemById(id));
+    }
 
-  @PutMapping("/{id}")
-  public Item updateItem(@PathVariable Long id, @RequestBody Item updatedItem){
-    return itemService.updateItem(id, updatedItem);
-  }
+  
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> deleteItem(@PathVariable Long id) {
+        itemService.deleteItemById(id);
+        return ResponseEntity.ok("Item deleted successfully");
+    }
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<String> deleteAllItems() {
+        itemService.deleteAllItems();
+        return ResponseEntity.ok("All items deleted");
+    }
+
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ItemResponse> updateItem(
+            @PathVariable Long id,
+            @RequestBody ItemRequest dto) {
+
+        ItemResponse updated = itemService.updateItem(id, dto);
+        return ResponseEntity.ok(updated);
+    }
 }
