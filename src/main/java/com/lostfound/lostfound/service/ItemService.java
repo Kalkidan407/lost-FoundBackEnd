@@ -31,26 +31,31 @@ public class ItemService {
     // --------------------------
     // Convert Entity -> Response DTO
     // --------------------------
-    private ItemResponse toDTO(Item item) {
-        ItemResponse dto = new ItemResponse();
-        User user = item.getUser();
-dto.setName(user != null ? user.getUsername() : null);
+   private ItemResponse toDTO(Item item) {
+    ItemResponse dto = new ItemResponse();
 
+    dto.setId(item.getId());
+    dto.setName(item.getName());
+    dto.setDescription(item.getDescription());
+    dto.setPhotoUrl(item.getPhotoUrl());
+    dto.setStatus(item.isStatus());
 
-        
+    // --- SAFE NULL CHECKS ---
+    dto.setReportedBy(
+        item.getUser() != null ? item.getUser().getUsername() : null
+    );
 
-        dto.setId(item.getId());
-        dto.setName(item.getName());
-        dto.setDescription(item.getDescription());
-        dto.setPhotoUrl(item.getPhotoUrl());
-        dto.setStatus(item.isStatus());
+    dto.setCategoryName(
+        item.getCategory() != null ? item.getCategory().getName() : null
+    );
 
-        dto.setReportedBy(item.getUser().getUsername());
-        dto.setCategoryName(item.getCategory().getName());
-        dto.setLocationName(item.getLocation().getName());
+    dto.setLocationName(
+        item.getLocation() != null ? item.getLocation().getName() : null
+    );
 
-        return dto;
-    }
+    return dto;
+}
+
 
     // --------------------------
     // Convert Request DTO -> Entity
@@ -62,6 +67,8 @@ dto.setName(user != null ? user.getUsername() : null);
         item.setName(dto.getName());
         item.setDescription(dto.getDescription());
         item.setPhotoUrl(dto.getPhotoUrl());
+
+        
 
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
