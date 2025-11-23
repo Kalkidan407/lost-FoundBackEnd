@@ -32,8 +32,12 @@ public class ItemService {
     // Convert Entity -> Response DTO
     // --------------------------
     private ItemResponse toDTO(Item item) {
-
         ItemResponse dto = new ItemResponse();
+        User user = item.getUser();
+dto.setName(user != null ? user.getUsername() : null);
+
+
+        
 
         dto.setId(item.getId());
         dto.setName(item.getName());
@@ -74,7 +78,7 @@ public class ItemService {
 
         return item;
     }
-    
+
 
     // --------------------------
     // Service Methods
