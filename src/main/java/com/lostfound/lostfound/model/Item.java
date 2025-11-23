@@ -35,7 +35,7 @@ public class Item {
 
  @ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name = "user_id")
-@OnDelete(action = OnDeleteAction.SET_NULL)
+
 private User user;
 
 
