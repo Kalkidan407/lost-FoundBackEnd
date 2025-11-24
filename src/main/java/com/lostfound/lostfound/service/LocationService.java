@@ -2,6 +2,9 @@ package com.lostfound.lostfound.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import javax.management.RuntimeMBeanException;
+
 import org.springframework.stereotype.Service;
 
 import com.lostfound.lostfound.dto.item.ItemResponse;
@@ -84,15 +87,19 @@ location.setName(request.getName());
     public void deleteAllLocations(){
         locationRepository.deleteAll();
     }
+public  LocationResponse updateLocation(Long id, LocationRequest updateedLocation){
+       
+Location location = locationRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Location entity not found")); //fetch the existing locationEntity from db
 
-    public  Location updateLocation(Long id, Location updateedLocation){
-        return locationRepository.findById(id)
-            .map(item -> {
-                item.setName(updateedLocation.getName());
-                item.setLatitude(updateedLocation.getLatitude());
-                item.setLongitude(updateedLocation.getLongitude());
-                return locationRepository.save(item);
-            }).orElseThrow(() -> new RuntimeException("Location not found with id      :" + id));
+  location.setName(updateedLocation.getName());  //update fields 
+  location.setLatitude(updateedLocation.getLatitude());
+ location.setLongitude(updateedLocation.getLongitude());
+ 
+ Location save = locationRepository.save(location);  //save the updated entity
+
+        return toDTO(save); //convert saved entity to DTO response , so use toDTO()
+        
     }
 
 
