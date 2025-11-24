@@ -1,4 +1,4 @@
-package com.lostfound.lostfound.dto;
+package com.lostfound.lostfound.dto.report;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

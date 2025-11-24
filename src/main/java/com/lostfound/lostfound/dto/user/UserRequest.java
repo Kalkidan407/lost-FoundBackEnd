@@ -1,4 +1,4 @@
-package com.lostfound.lostfound.dto;
+package com.lostfound.lostfound.dto.user;
 
 import java.util.List;
 
