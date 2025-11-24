@@ -35,7 +35,7 @@ public class ItemController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public ResponseEntity<ItemResponse> getItemById(@PathVariable Long id) {
         return ResponseEntity.ok(itemService.getItemById(id));
     }

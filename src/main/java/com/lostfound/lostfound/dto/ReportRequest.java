@@ -14,5 +14,6 @@ public class ReportRequest {
   
      private Long reportedItemId;   
     private Long reportedById;
+    private String reportType;
     
 }
