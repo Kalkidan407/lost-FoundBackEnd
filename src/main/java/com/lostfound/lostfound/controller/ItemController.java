@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.lostfound.lostfound.dto.ItemRequest;
-import com.lostfound.lostfound.dto.ItemResponse;
-
+import com.lostfound.lostfound.dto.item.ItemRequest;
+import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.service.ItemService;
 
 import lombok.RequiredArgsConstructor;
@@ -35,7 +34,7 @@ public class ItemController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public ResponseEntity<ItemResponse> getItemById(@PathVariable Long id) {
         return ResponseEntity.ok(itemService.getItemById(id));
     }

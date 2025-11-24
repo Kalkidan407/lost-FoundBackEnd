@@ -1,13 +1,11 @@
 package com.lostfound.lostfound.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
 
-import com.lostfound.lostfound.dto.ItemRequest;
-import com.lostfound.lostfound.dto.ItemResponse;
+import com.lostfound.lostfound.dto.item.ItemRequest;
+import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.model.Item;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.model.Location;
@@ -16,7 +14,6 @@ import com.lostfound.lostfound.repository.UserRepository;
 import com.lostfound.lostfound.repository.CategoryRepository;
 import com.lostfound.lostfound.repository.LocationRepository;
 import com.lostfound.lostfound.repository.ItemRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -29,8 +26,9 @@ public class ItemService {
     private final LocationRepository locationRepo;
 
     // --------------------------
-    // Convert Entity -> Response DTO
+    // Convert Entity -> Response DTO, /get/
     // --------------------------
+
    private ItemResponse toDTO(Item item) {
     ItemResponse dto = new ItemResponse();
 
@@ -39,8 +37,10 @@ public class ItemService {
     dto.setDescription(item.getDescription());
     dto.setPhotoUrl(item.getPhotoUrl());
     dto.setStatus(item.isStatus());
+    
 
     // --- SAFE NULL CHECKS ---
+
     dto.setReportedBy(
         item.getUser() != null ? item.getUser().getUsername() : null
     );
@@ -58,17 +58,15 @@ public class ItemService {
 
 
     // --------------------------
-    // Convert Request DTO -> Entity
+    // Convert Request DTO -> Entity (Create/update, Incoming Data → Backend)
     // --------------------------
+
     private Item fromDTO(ItemRequest dto) {
 
         Item item = new Item();
-
         item.setName(dto.getName());
         item.setDescription(dto.getDescription());
         item.setPhotoUrl(dto.getPhotoUrl());
-
-        
 
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
