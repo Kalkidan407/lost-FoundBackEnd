@@ -33,6 +33,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+  //  private String profilePictureUrl;
+  //  private String phoneNumber;
+
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -59,8 +62,8 @@ public class User {
     // private String verificationToken;
     // private String resetToken;
     // private Long tokenExpiry;
-    // private String profilePictureUrl;
-    // private String phoneNumber;
+  
+  
     // private String address;
     // private String fullName;
     // private String bio;
