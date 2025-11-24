@@ -3,8 +3,9 @@ package com.lostfound.lostfound.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
-import com.lostfound.lostfound.dto.ItemRequest;
-import com.lostfound.lostfound.dto.ItemResponse;
+
+import com.lostfound.lostfound.dto.item.ItemRequest;
+import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.model.Item;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.model.Location;

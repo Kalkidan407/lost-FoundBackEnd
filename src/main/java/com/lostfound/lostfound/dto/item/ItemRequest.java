@@ -1,4 +1,4 @@
-package com.lostfound.lostfound.dto;
+package com.lostfound.lostfound.dto.item;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;

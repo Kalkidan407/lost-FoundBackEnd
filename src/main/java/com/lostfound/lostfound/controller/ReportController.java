@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lostfound.lostfound.dto.ReportRequest;
-import com.lostfound.lostfound.dto.ReportResponse;
+import com.lostfound.lostfound.dto.report.ReportRequest;
+import com.lostfound.lostfound.dto.report.ReportResponse;
 import com.lostfound.lostfound.model.Report;
 import com.lostfound.lostfound.service.ReportService;
 

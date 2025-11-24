@@ -1,6 +1,10 @@
-package com.lostfound.lostfound.dto;
+package com.lostfound.lostfound.dto.user;
 
 import java.util.List;
+
+import com.lostfound.lostfound.dto.item.ItemResponse;
+import com.lostfound.lostfound.dto.report.ReportResponse;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

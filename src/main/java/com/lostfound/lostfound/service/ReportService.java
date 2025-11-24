@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.lostfound.lostfound.dto.ReportRequest;
-import com.lostfound.lostfound.dto.ReportResponse;
-import com.lostfound.lostfound.dto.UserResponse;
+import com.lostfound.lostfound.dto.report.ReportRequest;
+import com.lostfound.lostfound.dto.report.ReportResponse;
+import com.lostfound.lostfound.dto.user.UserResponse;
 import com.lostfound.lostfound.model.Item;
 import com.lostfound.lostfound.model.Report;
 import com.lostfound.lostfound.model.User;
