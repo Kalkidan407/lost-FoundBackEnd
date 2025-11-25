@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.lostfound.lostfound.dto.item.ItemResponse;
+import com.lostfound.lostfound.dto.user.UserRequest;
+import com.lostfound.lostfound.dto.user.UserResponse;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.repository.UserRepository;
 
@@ -15,6 +18,36 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     private final UserRepository userRepository;
 
+    private UserResponse toDTO(User user){
+        UserResponse dto = new UserResponse();
+dto.setName(user.getUsername());
+dto.setPassword(user.getPassword());
+dto.setEmail(user.getEmail());
+dto.setRole(user.getRole());
+dto.setId(user.getId());
+
+List<ItemResponse> itemDtos = user.getItems().stream().map(
+    item -> {
+        ItemResponse itemDto = new ItemResponse();
+        itemDto.setId(item.getId());
+        itemDto.setName(item.getName());
+       return itemDto;
+    }).toList();
+
+    dto.setItems(itemDtos);
+        return dto;
+
+    }
+
+    private User fromDTO(UserRequest request){
+        if (request == null) {return null; } 
+     User user = new User();
+     user.setUsername(request.getName());
+     user.setEmail(request.getEmail());
+     user.setPassword(request.getPassword());
+     return user;
+    
+    }
 
      public User createUser(User user){
         return userRepository.save(user);

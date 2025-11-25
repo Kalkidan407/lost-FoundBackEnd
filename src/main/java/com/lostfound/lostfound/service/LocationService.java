@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class LocationService {
     
    private final LocationRepository locationRepository;
-   private final ItemRepository  itemRepository;
+ 
 
 private LocationResponse toDTO( Location location){
     LocationResponse dto = new LocationResponse(); 
