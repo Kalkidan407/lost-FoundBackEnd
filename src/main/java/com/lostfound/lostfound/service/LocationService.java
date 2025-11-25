@@ -2,16 +2,11 @@ package com.lostfound.lostfound.service;
 
 import java.util.List;
 import java.util.Optional;
-
-import javax.management.RuntimeMBeanException;
-
 import org.springframework.stereotype.Service;
-
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.dto.location.LocationRequest;
 import com.lostfound.lostfound.dto.location.LocationResponse;
 import com.lostfound.lostfound.model.Location;
-import com.lostfound.lostfound.repository.ItemRepository;
 import com.lostfound.lostfound.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
 
