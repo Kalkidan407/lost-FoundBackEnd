@@ -89,7 +89,9 @@ location.setName(request.getName());
     public void deleteAllLocations(){
         locationRepository.deleteAll();
     }
-public  LocationResponse updateLocation(Long id, LocationRequest updateedLocation){
+
+
+ public  LocationResponse updateLocation(Long id, LocationRequest updateedLocation){
        
 Location location = locationRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Location entity not found")); //fetch the existing locationEntity from db
