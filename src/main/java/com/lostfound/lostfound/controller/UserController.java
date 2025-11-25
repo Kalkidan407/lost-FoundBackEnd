@@ -2,14 +2,18 @@ package com.lostfound.lostfound.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lostfound.lostfound.dto.user.UserRequest;
+import com.lostfound.lostfound.dto.user.UserResponse;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.service.UserService;
 
@@ -26,33 +30,39 @@ private final UserService userService;
 
 
 @PostMapping
-  public User createUser(@Valid @RequestBody User user){
+@ResponseStatus(HttpStatus.CREATED)
+  public UserResponse createUser(@Valid @RequestBody UserRequest user){
     return userService.createUser(user);
   }
 
 
 @GetMapping
-   public List<User> getAlUsers() {
+@ResponseStatus(HttpStatus.OK)
+   public List<UserResponse> getAlUsers() {
        return userService.getAllUser();
    }
 
 @GetMapping("/id/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUsersById(id).orElse(null);
+@ResponseStatus(HttpStatus.OK)
+    public UserResponse getUserById(@PathVariable Long id) {
+        return userService.getUsersById(id);
                
     }
 
 @GetMapping("/username/{name}")
-    public User getUserByUsername(@PathVariable String name) {
+@ResponseStatus(HttpStatus.OK)
+    public UserResponse getUserByUsername(@PathVariable String name) {
         return userService.getUserByUsername(name);
   }
 
   @GetMapping("/password/{username}")
-    public String getUserPassword(@PathVariable String username) {
+  @ResponseStatus(HttpStatus.OK)
+    public UserResponse getUserPassword(@PathVariable String username) {
         return userService.getUserPassword(username);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/delete/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteUserById(@PathVariable Long id){
     userService.deleteUserById(id);
   }

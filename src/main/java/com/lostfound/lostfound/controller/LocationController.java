@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lostfound.lostfound.dto.location.LocationRequest;
 import com.lostfound.lostfound.dto.location.LocationResponse;
-import com.lostfound.lostfound.model.Location;
 import com.lostfound.lostfound.service.LocationService;
 
 import lombok.RequiredArgsConstructor;

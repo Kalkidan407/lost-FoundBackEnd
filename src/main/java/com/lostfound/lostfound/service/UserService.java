@@ -19,6 +19,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     private UserResponse toDTO(User user){
+
+
         UserResponse dto = new UserResponse();
 dto.setName(user.getUsername());
 dto.setPassword(user.getPassword());
@@ -49,32 +51,40 @@ List<ItemResponse> itemDtos = user.getItems().stream().map(
     
     }
 
-     public User createUser(User user){
-        return userRepository.save(user);
+     public UserResponse createUser(UserRequest dto) {
+        User user =  fromDTO(dto);
+        User saved = userRepository.save(user);
+
+        return toDTO(saved);
      }
+
+
    
     public boolean isUsernameTaken(String username) {
         return userRepository.findByUsername(username) != null;
     }
     
 
-    public Optional<User> getUsersById(Long id){
-        return userRepository.findById(id);
+    public UserResponse getUsersById(Long id){
+        User user = userRepository.findById(id)
+                     .orElseThrow(() -> new RuntimeException("User not found with id:" + id));
+        return toDTO(user);
     }
 
     public boolean isEmailTaken(String email) {
         return userRepository.findByEmail(email) != null;
     }
 
-public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+public UserResponse getUserByUsername(String username) {
+    User user = userRepository.findByUsername(username);
+        return toDTO(user);
     }
 
 
-    public String getUserPassword(String username) {
+    public UserResponse getUserPassword(String username) {
        
         User user = userRepository.findByUsername(username);
-        return user != null ? user.getPassword() : null;
+        return toDTO(user);
     }
 
 
@@ -85,9 +95,13 @@ public User getUserByUsername(String username) {
 
 
 
-     public List<User> getAllUser(){
-        return userRepository.findAll();
+     public List<UserResponse> getAllUser(){
+        List<User> user = userRepository.findAll();
+
+        return user.stream().map(this::toDTO).toList();
     }
+
+
     public void deleteUserById(Long id){
         userRepository.deleteById(id);
     }
@@ -95,14 +109,17 @@ public User getUserByUsername(String username) {
         userRepository.deleteAll();
     }
 
-    public User updateUser(Long id, User updatedUser){
-      return userRepository.findById(id)
-        .map(user -> {
-           user.setUsername(updatedUser.getUsername());
-           user.setEmail(updatedUser.getEmail());
-           user.setPassword(updatedUser.getPassword());
-           return userRepository.save(user);
-        }).orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    public UserResponse updateUser(Long id, UserRequest updatedUser){
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("User name not found with" + id));
+         
+                user.setUsername(updatedUser.getName());
+                user.setEmail(updatedUser.getEmail());
+                user.setPassword(updatedUser.getPassword());
+
+                User save = userRepository.save(user);
+              
+      return toDTO(user);
     }
 
 }
