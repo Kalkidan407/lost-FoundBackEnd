@@ -34,27 +34,32 @@ public class LocationController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<LocationResponse> getAllLocations(){
         return locationService.getAllLocations();
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public LocationResponse getLocationById(@PathVariable Long id){
         return locationService.getLocationById(id);
                
     }
 
     @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteLocationById(@PathVariable Long id){
         locationService.deleteLocationById(id);
     }
 
     @DeleteMapping("/deleteAll")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAllLocations(){
         locationService.deleteAllLocations();
     }
 
     @PutMapping("/update/{id}")  
+    @ResponseStatus(HttpStatus.OK)
     public LocationResponse updateLocation(@PathVariable Long id, @RequestBody LocationRequest request){
         return locationService.updateLocation(id, request);
     }
