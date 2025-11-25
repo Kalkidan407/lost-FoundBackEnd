@@ -8,7 +8,7 @@ import lombok.Data;
 public class LocationRequest {
  
     private String  name;
-    private String longtitude;
+    private String longitude;
     private String latitude;
     
 
