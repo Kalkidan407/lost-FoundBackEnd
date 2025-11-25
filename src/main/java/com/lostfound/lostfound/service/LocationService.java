@@ -56,13 +56,15 @@ location.setName(request.getName());
     return location;
 }
 
+
 // service  methods //
 
   public LocationResponse addLocation(LocationRequest dto) {
-    Location location = fromDTO(dto); // convert locationDTO to locationEntity
-    Location saved = locationRepository.save(location); // Save Entity
 
-    return toDTO(saved); // convert saved locationEntity to locationRequest DTO
+    Location location = fromDTO(dto); 
+    Location saved = locationRepository.save(location);
+
+    return toDTO(saved); 
     
     }
 
