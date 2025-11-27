@@ -19,8 +19,6 @@ public class UserService {
     private final UserRepository userRepository;
 
     private UserResponse toDTO(User user){
-
-
         UserResponse dto = new UserResponse();
 dto.setName(user.getUsername());
 dto.setPassword(user.getPassword());
@@ -28,7 +26,7 @@ dto.setEmail(user.getEmail());
 dto.setRole(user.getRole());
 dto.setId(user.getId());
 
-List<ItemResponse> itemDtos = user.getItems().stream().map(
+List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems().stream().map(
     item -> {
         ItemResponse itemDto = new ItemResponse();
         itemDto.setId(item.getId());
