@@ -31,14 +31,14 @@ public class UserController {
 private final UserService userService;
 
 
-@PostMapping
+@PostMapping("/create")
 @ResponseStatus(HttpStatus.CREATED)
   public UserResponse createUser(@Valid @RequestBody UserRequest user){
     return userService.createUser(user);
   }
 
 
-@GetMapping
+@GetMapping("/getAll")
 @ResponseStatus(HttpStatus.OK)
    public List<UserResponse> getAlUsers() {
        return userService.getAllUser();
