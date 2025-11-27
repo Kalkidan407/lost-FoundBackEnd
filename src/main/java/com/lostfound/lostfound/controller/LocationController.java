@@ -3,6 +3,7 @@ package com.lostfound.lostfound.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,14 +48,16 @@ public class LocationController {
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteLocationById(@PathVariable Long id){
+    public ResponseEntity<String> deleteLocationById(@PathVariable Long id){
         locationService.deleteLocationById(id);
+        return ResponseEntity.ok("Location deleted successfully with id" + id);
     }
 
     @DeleteMapping("/deleteAll")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAllLocations(){
+    public ResponseEntity<String> deleteAllLocations(){
         locationService.deleteAllLocations();
+        return ResponseEntity.ok("All locations deleted ");
     }
 
     @PutMapping("/update/{id}")  

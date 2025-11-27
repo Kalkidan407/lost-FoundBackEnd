@@ -119,7 +119,7 @@ public UserResponse getUserByUsername(String username) {
 
                 User save = userRepository.save(user);
               
-      return toDTO(user);
+      return toDTO(save);
     }
 
 }

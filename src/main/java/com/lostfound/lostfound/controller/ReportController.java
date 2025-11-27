@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lostfound.lostfound.dto.report.ReportRequest;
 import com.lostfound.lostfound.dto.report.ReportResponse;
-import com.lostfound.lostfound.model.Report;
+
 import com.lostfound.lostfound.service.ReportService;
 
 import lombok.RequiredArgsConstructor;
