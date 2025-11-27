@@ -38,7 +38,7 @@ private final UserService userService;
   }
 
 
-@GetMapping("/getAll")
+@GetMapping
 @ResponseStatus(HttpStatus.OK)
    public List<UserResponse> getAlUsers() {
        return userService.getAllUser();
