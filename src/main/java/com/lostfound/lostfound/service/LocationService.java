@@ -23,14 +23,13 @@ private LocationResponse toDTO( Location location){
     dto.setLatitude(location.getLatitude());
     dto.setLongtitude(location.getLongitude());
 
-  List<ItemResponse> itemDtos = location.getItems().stream().map(
- item->{
-    ItemResponse itemDto = new ItemResponse();
-    itemDto.setId(item.getId());
-    itemDto.setName(item.getName());
-    itemDto.setDescription(item.getDescription());
-    return itemDto;
- }).toList();
+List<ItemResponse> itemDtos = location.getItems()== null ? List.of(): location.getItems().stream().map(
+    item -> {
+        ItemResponse itemDto = new ItemResponse();
+        itemDto.setId(item.getId());
+        itemDto.setName(item.getName());
+       return itemDto;
+    }).toList();
 
    dto.setItems(itemDtos);
     

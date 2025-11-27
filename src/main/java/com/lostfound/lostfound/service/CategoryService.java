@@ -23,15 +23,13 @@ private CategoryResponse toDTO(Category category){
   dto.setName(category.getName());
   dto.setId(category.getId());
 
-   List<ItemResponse> itemDtos = category.getItems().stream().map(
- item->{
-    ItemResponse itemDto = new ItemResponse();
-    itemDto.setId(item.getId());
-    itemDto.setName(item.getName());
-    itemDto.setDescription(item.getDescription());
-    return itemDto;
- }).toList();
-
+ List<ItemResponse> itemDtos = category.getItems()== null ? List.of(): category.getItems().stream().map(
+    item -> {
+        ItemResponse itemDto = new ItemResponse();
+        itemDto.setId(item.getId());
+        itemDto.setName(item.getName());
+       return itemDto;
+    }).toList();
    dto.setItems(itemDtos);
 
 
