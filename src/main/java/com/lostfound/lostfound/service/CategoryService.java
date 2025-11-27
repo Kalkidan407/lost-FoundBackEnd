@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.lostfound.lostfound.dto.category.CategoryRequest;
 import com.lostfound.lostfound.dto.category.CategoryResponse;
+import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.model.Category;
 import com.lostfound.lostfound.repository.CategoryRepository;
 
@@ -17,11 +18,12 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
 private CategoryResponse toDTO(Category category){
+
   CategoryResponse dto = new CategoryResponse();
   dto.setName(category.getName());
   dto.setId(category.getId());
 
-   List<ItemResponse> itemDtos = location.getItems().stream().map(
+   List<ItemResponse> itemDtos = category.getItems().stream().map(
  item->{
     ItemResponse itemDto = new ItemResponse();
     itemDto.setId(item.getId());
@@ -72,15 +74,17 @@ private Category fromDTO(CategoryRequest request){
 
     
 
- public Category updateCategory(Long id, Category updatedCategory) {
-    return categoryRepository.findById(id)
-        .map(category -> {
-            category.setName(updatedCategory.getName());
+ public CategoryResponse updateCategory(Long id, CategoryRequest updatedCategory) {
+     Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category entity not found with id" + id));
 
-            return categoryRepository.save(category);
-        })
-        .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+                category.setName(updatedCategory.getName());
+                
+                Category save = categoryRepository.save(category);
+
+    return toDTO(save);
+
+
 }
-
 
 }

@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lostfound.lostfound.dto.category.CategoryRequest;
+import com.lostfound.lostfound.dto.category.CategoryResponse;
 import com.lostfound.lostfound.dto.user.UserRequest;
 import com.lostfound.lostfound.dto.user.UserResponse;
 
@@ -24,8 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-    // User-related endpoints can be added here
-
+    
 private final UserService userService;
 
 
@@ -67,7 +69,11 @@ private final UserService userService;
     userService.deleteUserById(id);
   }
     
-    
+     @PutMapping("/update/{id}")
+     @ResponseStatus(HttpStatus.OK)
+    public UserResponse updateCategory(@PathVariable Long id, @RequestBody UserRequest updatedUser){
+      return userService.updateUser(id, updatedUser);
+    }
    
 
     
