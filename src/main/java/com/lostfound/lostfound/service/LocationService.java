@@ -21,7 +21,7 @@ private LocationResponse toDTO( Location location){
     LocationResponse dto = new LocationResponse(); 
     dto.setId(location.getId());
     dto.setLatitude(location.getLatitude());
-    dto.setLongtitude(location.getLongitude());
+    dto.setLongitude(location.getLongitude());
 
 List<ItemResponse> itemDtos = location.getItems()== null ? List.of(): location.getItems().stream().map(
     item -> {
