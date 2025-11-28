@@ -43,9 +43,10 @@ private Location fromDTO(LocationRequest request){
 }
 
     Location location = new Location();
+    location.setName(request.getName());
 location.setLatitude(request.getLatitude());
 location.setLongitude(request.getLongitude());
-location.setName(request.getName());
+
 
     return location;
 }
