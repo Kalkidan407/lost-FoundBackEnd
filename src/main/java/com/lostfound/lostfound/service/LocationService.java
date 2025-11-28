@@ -20,6 +20,7 @@ public class LocationService {
 private LocationResponse toDTO( Location location){
     LocationResponse dto = new LocationResponse(); 
     dto.setId(location.getId());
+    dto.setName(location.getName());
     dto.setLatitude(location.getLatitude());
     dto.setLongitude(location.getLongitude());
 
