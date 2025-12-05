@@ -53,6 +53,7 @@ public class ItemService {
         item.getLocation() != null ? item.getLocation().getName() : null
     );
 
+
     return dto;
 }
 
