@@ -82,6 +82,8 @@ public class ItemService {
                 .orElseThrow(() -> new RuntimeException("Location not found"));
         item.setLocation(location);
 
+        
+
         return item;
     }
 
