@@ -68,6 +68,7 @@ public class ItemService {
         item.setName(dto.getName());
         item.setDescription(dto.getDescription());
         item.setPhotoUrl(dto.getPhotoUrl());
+      
 
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -82,15 +83,14 @@ public class ItemService {
                 .orElseThrow(() -> new RuntimeException("Location not found"));
         item.setLocation(location);
 
-        
-
         return item;
+
     }
 
 
-    // --------------------------
-    // Service Methods
-    // --------------------------
+    // -------------------------- //
+    //     Service Methods
+    // -------------------------- //
 
     public List<ItemResponse> getAllItems() {
         return itemRepository.findAll()
