@@ -45,10 +45,10 @@ private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
-  
     private Location location;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(   mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(nullable = true)
     private List<Report> reports;
 
 
@@ -60,8 +60,8 @@ private User user;
     @Column(nullable = false,  length = 2000)
     private String description;
 
-   @Column(nullable = false, unique = true)
-    private String locationFound;
+  //  @Column(nullable = false, unique = true)
+  //   private String locationFound;
 
      @Column(nullable = false, unique = true)
     private String photoUrl;
