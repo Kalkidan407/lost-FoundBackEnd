@@ -29,7 +29,9 @@ public class ItemService {
     // Convert Entity -> Response DTO, /get/
     // --------------------------
 
-   private ItemResponse toDTO(Item item) {
+
+private ItemResponse toDTO(Item item) {
+
     ItemResponse dto = new ItemResponse();
 
     dto.setId(item.getId());
@@ -37,25 +39,58 @@ public class ItemService {
     dto.setDescription(item.getDescription());
     dto.setPhotoUrl(item.getPhotoUrl());
     dto.setStatus(item.isStatus());
-    
 
-    // --- SAFE NULL CHECKS ---
+    if (item.getUser() != null) {
+        dto.setUserId(item.getUser().getId());
+        dto.setUserName(item.getUser().getUsername());
+    }
 
-    dto.setReportedBy(
-        item.getUser() != null ? item.getUser().getUsername() : null
-    );
+    if (item.getCategory() != null) {
+        dto.setCategoryId(item.getCategory().getId());
+        dto.setCategoryName(item.getCategory().getName());
+    }
 
-    dto.setCategoryName(
-        item.getCategory() != null ? item.getCategory().getName() : null
-    );
+    if (item.getLocation() != null) {
+        dto.setLocationId(item.getLocation().getId());
+        dto.setLocationName(item.getLocation().getName());
+    }
 
-    dto.setLocationName(
-        item.getLocation() != null ? item.getLocation().getName() : null
-    );
-
+    // report mapping later (when implemented)
 
     return dto;
 }
+
+
+
+
+//    private ItemResponse toDTO(Item item) {
+    
+//     ItemResponse dto = new ItemResponse();
+
+//     dto.setId(item.getId());
+//     dto.setName(item.getName());
+//     dto.setDescription(item.getDescription());
+//     dto.setPhotoUrl(item.getPhotoUrl());
+//     dto.setStatus(item.isStatus());
+    
+
+//     // --- SAFE NULL CHECKS ---
+
+//     dto.setReportedBy(
+//         item.getUser() != null ? item.getUser().getUsername() : null
+//     );
+
+//     dto.setCategoryName(
+//         item.getCategory() != null ? item.getCategory().getName() : null
+//     );
+
+//     dto.setLocationName(
+//         item.getLocation() != null ? item.getLocation().getName() : null
+//     );
+
+
+//     return dto;
+// }
 
 
     // --------------------------

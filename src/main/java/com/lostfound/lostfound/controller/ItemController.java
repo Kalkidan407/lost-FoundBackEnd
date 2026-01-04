@@ -22,10 +22,10 @@ public class ItemController {
     private final ItemService itemService;
 
     @PostMapping("/create")
-     @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ItemResponse> addItem(@RequestBody ItemRequest dto) {
-        ItemResponse created = itemService.addItem(dto);
 
+        ItemResponse created = itemService.addItem(dto);
         return ResponseEntity.ok(created);
     }
 
