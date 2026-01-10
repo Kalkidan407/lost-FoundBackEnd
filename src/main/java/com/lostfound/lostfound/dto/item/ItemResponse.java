@@ -18,7 +18,7 @@ public class ItemResponse {
     private Long categoryId;
     private String categoryName;
 
-    private Long location;
+    private Long locationId;
     private String locationName;
 
     private Long reportId;

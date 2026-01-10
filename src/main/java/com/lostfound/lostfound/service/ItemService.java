@@ -103,6 +103,8 @@ private ItemResponse toDTO(Item item) {
         item.setName(dto.getName());
         item.setDescription(dto.getDescription());
         item.setPhotoUrl(dto.getPhotoUrl());
+        item.setStatus(false); 
+
       
 
         User user = userRepository.findById(dto.getUserId())
@@ -111,6 +113,7 @@ private ItemResponse toDTO(Item item) {
 
         Category category = categoryRepo.findById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
+
         item.setCategory(category);
 
        

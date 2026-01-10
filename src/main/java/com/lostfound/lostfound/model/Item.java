@@ -60,8 +60,7 @@ private User user;
     @Column(nullable = false,  length = 2000)
     private String description;
 
-   @Column(nullable = false, unique = true)
-    private String locationFound;
+
 
      @Column(nullable = false, unique = true)
     private String photoUrl;
