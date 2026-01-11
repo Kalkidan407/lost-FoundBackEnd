@@ -53,7 +53,7 @@ private User user;
 
 
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false )
     private String name;
 
  
