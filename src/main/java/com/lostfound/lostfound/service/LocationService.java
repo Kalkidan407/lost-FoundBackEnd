@@ -1,7 +1,6 @@
 package com.lostfound.lostfound.service;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.dto.location.LocationRequest;
