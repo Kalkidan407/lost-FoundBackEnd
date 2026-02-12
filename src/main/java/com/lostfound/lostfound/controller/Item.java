@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/items")
 
 
-public class ItemController {
+public class Item{
 
     private final ItemService itemService;
 

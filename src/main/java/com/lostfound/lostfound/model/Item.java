@@ -47,10 +47,7 @@ private User user;
     private Location location;
 
     @OneToMany(   mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    
     private List<Report> reports;
-
-
 
     @Column(nullable = false )
     private String name;
@@ -59,15 +56,11 @@ private User user;
     @Column(nullable = false,  length = 2000)
     private String description;
 
-
-
      @Column(nullable = false, unique = true)
     private String photoUrl;
 
      @Column(nullable = false, unique = true)
     private boolean status;
 
-
-  
   
 }

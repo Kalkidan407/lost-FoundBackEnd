@@ -61,38 +61,6 @@ private ItemResponse toDTO(Item item) {
 }
 
 
-
-
-//    private ItemResponse toDTO(Item item) {
-    
-//     ItemResponse dto = new ItemResponse();
-
-//     dto.setId(item.getId());
-//     dto.setName(item.getName());
-//     dto.setDescription(item.getDescription());
-//     dto.setPhotoUrl(item.getPhotoUrl());
-//     dto.setStatus(item.isStatus());
-    
-
-//     // --- SAFE NULL CHECKS ---
-
-//     dto.setReportedBy(
-//         item.getUser() != null ? item.getUser().getUsername() : null
-//     );
-
-//     dto.setCategoryName(
-//         item.getCategory() != null ? item.getCategory().getName() : null
-//     );
-
-//     dto.setLocationName(
-//         item.getLocation() != null ? item.getLocation().getName() : null
-//     );
-
-
-//     return dto;
-// }
-
-
     // --------------------------
     // Convert Request DTO -> Entity (Create/update, Incoming Data → Backend)
     // --------------------------
