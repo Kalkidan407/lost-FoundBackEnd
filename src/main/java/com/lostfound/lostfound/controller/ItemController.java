@@ -37,7 +37,7 @@ public class ItemController {
     }
 
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/{id}")
        @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ItemResponse> getItemById(@PathVariable Long id) {
         return ResponseEntity.ok(itemService.getItemById(id));
