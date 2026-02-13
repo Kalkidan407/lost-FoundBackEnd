@@ -29,34 +29,26 @@ public class ItemService {
     // Convert Entity -> Response DTO, /get/
     // --------------------------
 
-
 private ItemResponse toDTO(Item item) {
-
     ItemResponse dto = new ItemResponse();
-
     dto.setId(item.getId());
     dto.setName(item.getName());
     dto.setDescription(item.getDescription());
     dto.setPhotoUrl(item.getPhotoUrl());
     dto.setStatus(item.isStatus());
-
     if (item.getUser() != null) {
         dto.setUserId(item.getUser().getId());
         dto.setUserName(item.getUser().getUsername());
     }
-
     if (item.getCategory() != null) {
         dto.setCategoryId(item.getCategory().getId());
         dto.setCategoryName(item.getCategory().getName());
     }
-
     if (item.getLocation() != null) {
         dto.setLocationId(item.getLocation().getId());
         dto.setLocationName(item.getLocation().getName());
     }
-
     // report mapping later (when implemented)
-
     return dto;
 }
 
@@ -73,10 +65,9 @@ private ItemResponse toDTO(Item item) {
         item.setPhotoUrl(dto.getPhotoUrl());
         item.setStatus(false); 
 
-      
-
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
+                
         item.setUser(user);
 
         Category category = categoryRepo.findById(dto.getCategoryId())
