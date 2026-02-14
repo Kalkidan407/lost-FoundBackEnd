@@ -22,7 +22,7 @@ public class UserService {
         UserResponse dto = new UserResponse();
 dto.setName(user.getUsername());
 dto.setEmail(user.getEmail());
-dto.setRole(user.getRole());
+//dto.setRole(user.getRole());
 dto.setId(user.getId());
 
 List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems().stream().map(
