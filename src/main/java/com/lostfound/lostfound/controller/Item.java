@@ -24,7 +24,6 @@ public class Item{
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ItemResponse> addItem(@RequestBody ItemRequest dto) {
-
         ItemResponse created = itemService.addItem(dto);
         return ResponseEntity.ok(created);
     }

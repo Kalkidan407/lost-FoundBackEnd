@@ -51,12 +51,9 @@ List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems(
      public UserResponse createUser(UserRequest dto) {
         User user =  fromDTO(dto);
         User saved = userRepository.save(user);
-
         return toDTO(saved);
      }
 
-
-   
     public boolean isUsernameTaken(String username) {
         return userRepository.findByUsername(username) != null;
     }

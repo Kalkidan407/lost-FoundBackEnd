@@ -34,7 +34,6 @@ public class Location {
     private String longitude;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
-    
     private List<Item> items;
     
 }
