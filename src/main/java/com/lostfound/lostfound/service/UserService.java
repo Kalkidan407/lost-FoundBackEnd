@@ -21,7 +21,6 @@ public class UserService {
     private UserResponse toDTO(User user){
         UserResponse dto = new UserResponse();
 dto.setName(user.getUsername());
-dto.setPassword(user.getPassword());
 dto.setEmail(user.getEmail());
 dto.setRole(user.getRole());
 dto.setId(user.getId());
