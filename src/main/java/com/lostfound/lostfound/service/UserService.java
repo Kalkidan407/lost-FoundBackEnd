@@ -3,6 +3,7 @@ package com.lostfound.lostfound.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.lostfound.lostfound.dto.item.ItemResponse;
@@ -70,14 +71,16 @@ List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems(
     }
 
 public UserResponse getUserByUsername(String username) {
-    User user = userRepository.findByUsername(username);
+    User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> 
+                          new UsernameNotFoundException("User not found")) ;
         return toDTO(user);
     }
 
 
     public UserResponse getUserPassword(String username) {
        
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return toDTO(user);
     }
 
