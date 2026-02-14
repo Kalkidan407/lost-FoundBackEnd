@@ -18,7 +18,6 @@ public class UserResponse {
     private String name;
     private String role;
     private String email;
-    private String password;
     private List<ReportResponse> report;
     private List<ItemResponse> items;
     
