@@ -30,7 +30,6 @@ public class User {
     
 private final UserService userService;
 
-
 @PostMapping("/create")
 @ResponseStatus(HttpStatus.CREATED)
   public UserResponse createUser(@Valid @RequestBody UserRequest user){
