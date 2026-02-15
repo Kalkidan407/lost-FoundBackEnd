@@ -10,8 +10,10 @@ import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.repository.UserRepository;
 import com.lostfound.lostfound.security.JwtService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "1-Authentication", description = "Register & Login APIs")
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
