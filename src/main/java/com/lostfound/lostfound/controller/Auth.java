@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class Auth{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
