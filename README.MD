@@ -123,31 +123,26 @@
 
 ##  Security
 
-Passwords encrypted using BCrypt
-
-Stateless authentication using JWT
-
-All protected routes require valid token
-
-Swagger configured with Bearer Authentication
+```   
+ Passwords encrypted using BCrypt
+ Stateless authentication using JWT
+ All protected routes require valid token
+ Swagger configured with Bearer Authentication
+```
 
 ## Future Improvements
-
-Email verification
-
-Password reset
-
-Role-based ADMIN dashboard
-
-Image upload support (Cloud storage)
-
-Pagination & filtering
-
-Unit & integration tests
+ ```
+ Email verification
+ Password reset
+ Role-based ADMIN dashboard
+ Image upload support (Cloud storage)
+ Pagination & filtering
+ Unit & integration tests
+```
 
 ## 👨‍💻 Author
+```
+  Developed by Kalkidan Kelemework
 
-Developed by Kalkidan Kelemework
-
-Backend Developer | Spring Boot | REST APIs | Cloud Deployment
-
+  Backend Developer | Spring Boot | REST APIs | Cloud Deployment
+```
