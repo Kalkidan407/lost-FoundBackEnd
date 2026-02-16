@@ -13,7 +13,7 @@ import com.lostfound.lostfound.security.JwtService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
-@Tag(name = "1-Authentication", description = "Register & Login APIs")
+@Tag(name = "Auth", description = "Register & Login APIs")
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -26,15 +26,14 @@ public class Auth{
 
     @PostMapping("/register")
     public String register(@RequestBody RegisterRequest request) {
-
         User user = new User();
         user.setUsername(request.getUserName());
         user.setEmail(request.getEmail());
         user.setPassword(
                 passwordEncoder.encode(request.getPassword())
         );
+        
         user.setRole(Role.USER);
-
         userRepository.save(user);
 
         return "User registered successfully";
@@ -55,4 +54,5 @@ public class Auth{
 
         return new AuthResponse(token);
     }
+
 }
