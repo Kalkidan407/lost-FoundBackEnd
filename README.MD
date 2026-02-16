@@ -77,3 +77,33 @@ Swagger / OpenAPI 2.6.0 (springdoc)
 ## API Documentation
  Swagger Ui avaliable at :- 
    https://findme-1-e6k5.onrender.com/swagger-ui/index.html#/
+
+## How to Authorize in swagger
+ 1. Click Authorize
+ 2.  Paste :- 
+    ```
+    Bearer <your-token>
+    ```
+ 3. Now access protected endpoints 🔐
+
+## Enviroment variables
+
+    ```
+  
+spring.datasource.url=jdbc:postgresql://.....
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
+
+    ```
+
+
+ #### Run Locally
+
+1️⃣ Clone Repository
+git clone https://github.com/your-username/lostfound-api.git
+cd lostfound-api
+
+2️⃣ Build Project
+mvn clean install
+
+3️⃣ Run Application   
