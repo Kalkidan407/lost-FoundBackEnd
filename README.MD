@@ -3,41 +3,46 @@
 
  #### A secure RESTful backend for a Lost & Found platform built with Spring Boot, featuring JWT authentication and interactive API documentation via Swagger.
 
-### 🚀 Features
+### Features
 
 🔐 JWT Authentication (Login & Register)
 
 👤 User Management
 
-### 📦 Lost & Found Item Management
+###  Lost & Found Item Management
 
-🛡 Role-Based Authorization
+```
+   Role-Based Authorization
 
-📄 Interactive API Documentation (Swagger UI)
+  Interactive API Documentation (Swagger UI)
 
-🗄 PostgreSQL Database Integration
+  PostgreSQL Database Integration
 
-🌍 Cloud Deployment Ready (Render)
+  Cloud Deployment Ready (Render)
+```
+
 
 ### 🛠 Tech Stack
+```
+  Java 21
 
-Java 21
+  Spring Boot 3.4.5
 
-Spring Boot 3.4.5
+ Spring Security
 
-Spring Security
+  Spring Data JPA
 
-Spring Data JPA
+  JWT (JSON Web Token)
 
-JWT (JSON Web Token)
+ PostgreSQL
 
-PostgreSQL
+ Maven
 
-Maven
+ Swagger / OpenAPI 2.6.0 (springdoc)
+```
 
-Swagger / OpenAPI 2.6.0 (springdoc)
+##  Project Structure
 
-## 📂 Project Structure
 ```
  src/main/java/com/lostfound/lostfound
 │
@@ -52,20 +57,21 @@ Swagger / OpenAPI 2.6.0 (springdoc)
 ```
 
 ## 🔐 Authentication Flow 
+
   1. User register via :- 
      ```
       POST /api/auth/register
      ```
 
-2. User login via :- 
+ 2. User login via :- 
   ```
     POST /api/auth/login
   ``` 
  3. Server returns JWT token 
  ```
    {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
+     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
 ```
 
 
@@ -74,9 +80,11 @@ Swagger / OpenAPI 2.6.0 (springdoc)
    Authorization: Bearer <your_token>
    ```
  
-## API Documentation
+
+### API Documentation
  Swagger Ui avaliable at :- 
    https://findme-1-e6k5.onrender.com/swagger-ui/index.html#/
+
 
 ## How to Authorize in swagger
  1. Click Authorize
@@ -113,7 +121,7 @@ Swagger / OpenAPI 2.6.0 (springdoc)
   mvn spring-boot:run
  ```
 
-## 🛡 Security
+##  Security
 
 Passwords encrypted using BCrypt
 
@@ -123,7 +131,7 @@ All protected routes require valid token
 
 Swagger configured with Bearer Authentication
 
-## 📌 Future Improvements
+## Future Improvements
 
 Email verification
 
