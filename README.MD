@@ -89,11 +89,9 @@ Swagger / OpenAPI 2.6.0 (springdoc)
 ## Enviroment variables
 
     ```
-  
-spring.datasource.url=jdbc:postgresql://.....
-spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
-spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
-
+       spring.datasource.url=jdbc:postgresql://.....
+       spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+       spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
     ```
 
 
