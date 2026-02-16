@@ -23,7 +23,7 @@ A secure RESTful backend for a Lost & Found platform built with Spring Boot, fea
 
 Java 21
 
-Spring Boot 3.x
+Spring Boot 3.4.5
 
 Spring Security
 
@@ -35,4 +35,39 @@ PostgreSQL
 
 Maven
 
-Swagger / OpenAPI (springdoc)
+Swagger / OpenAPI 2.6.0 (springdoc)
+
+## 📂 Project Structure
+
+ src/main/java/com/lostfound/lostfound
+│
+├── config/          # Security & OpenAPI configuration
+├── controller/      # REST Controllers
+├── service/         # Business logic layer
+├── repository/      # JPA repositories
+├── model/           # Entities
+├── dto/             # Data Transfer Objects
+├── security/        # JWT filter & utilities
+└── LostfoundApplication.java
+
+## 🔐 Authentication Flow 
+  1. User register via :- 
+     ```
+      POST /api/auth/register
+     ```
+
+2. User login via :- 
+  ```
+    POST /api/auth/login
+  ``` 
+ 3. Server returns JWT token 
+
+   {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+
+
+4. Use token in requests:
+   
+   Authorization: Bearer <your_token>
+ 
