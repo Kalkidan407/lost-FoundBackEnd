@@ -98,10 +98,48 @@ Swagger / OpenAPI 2.6.0 (springdoc)
  #### Run Locally
 
 1️⃣ Clone Repository
-git clone https://github.com/your-username/lostfound-api.git
-cd lostfound-api
+
+```
+  git clone  https://github.com/Kalkidan407/lost-FoundBackEnd.git
+  cd lostfound-api
+```
 
 2️⃣ Build Project
-mvn clean install
-
+```
+  mvn clean install
+```
 3️⃣ Run Application   
+ ```
+  mvn spring-boot:run
+ ```
+
+## 🛡 Security
+
+Passwords encrypted using BCrypt
+
+Stateless authentication using JWT
+
+All protected routes require valid token
+
+Swagger configured with Bearer Authentication
+
+## 📌 Future Improvements
+
+Email verification
+
+Password reset
+
+Role-based ADMIN dashboard
+
+Image upload support (Cloud storage)
+
+Pagination & filtering
+
+Unit & integration tests
+
+## 👨‍💻 Author
+
+Developed by Kalkidan Kelemework
+
+Backend Developer | Spring Boot | REST APIs | Cloud Deployment
+
