@@ -1,7 +1,7 @@
 
 # Lost & Found API
 
-A secure RESTful backend for a Lost & Found platform built with Spring Boot, featuring JWT authentication and interactive API documentation via Swagger.
+ #### A secure RESTful backend for a Lost & Found platform built with Spring Boot, featuring JWT authentication and interactive API documentation via Swagger.
 
 ### 🚀 Features
 
@@ -38,7 +38,7 @@ Maven
 Swagger / OpenAPI 2.6.0 (springdoc)
 
 ## 📂 Project Structure
-
+```
  src/main/java/com/lostfound/lostfound
 │
 ├── config/          # Security & OpenAPI configuration
@@ -49,6 +49,7 @@ Swagger / OpenAPI 2.6.0 (springdoc)
 ├── dto/             # Data Transfer Objects
 ├── security/        # JWT filter & utilities
 └── LostfoundApplication.java
+```
 
 ## 🔐 Authentication Flow 
   1. User register via :- 
@@ -61,13 +62,18 @@ Swagger / OpenAPI 2.6.0 (springdoc)
     POST /api/auth/login
   ``` 
  3. Server returns JWT token 
-
+ ```
    {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
+```
 
 
 4. Use token in requests:
-   
+   ```
    Authorization: Bearer <your_token>
+   ```
  
+## API Documentation
+ Swagger Ui avaliable at :- 
+   https://findme-1-e6k5.onrender.com/swagger-ui/index.html#/
