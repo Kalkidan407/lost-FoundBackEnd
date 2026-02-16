@@ -22,7 +22,7 @@
 ```
 
 
-### 🛠 Tech Stack
+### Tech Stack
 ```
   Java 21
 
@@ -56,7 +56,7 @@
 └── LostfoundApplication.java
 ```
 
-## 🔐 Authentication Flow 
+##  Authentication Flow 
 
   1. User register via :- 
      ```
