@@ -76,7 +76,7 @@
 
 
 4. Use token in requests
-5. 
+   
    ```
    Authorization: Bearer <your_token>
    ```
