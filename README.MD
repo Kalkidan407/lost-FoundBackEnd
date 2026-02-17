@@ -3,13 +3,13 @@
 
  #### A secure RESTful backend for a Lost & Found platform built with Spring Boot, featuring JWT authentication and interactive API documentation via Swagger.
 
-### Features
+## Features
 
 🔐 JWT Authentication (Login & Register)
 
 👤 User Management
 
-###  Lost & Found Item Management
+## Lost & Found Item Management
 
 ```
    Role-Based Authorization
@@ -22,17 +22,17 @@
 ```
 
 
-### Tech Stack
+## Tech Stack
 ```
-  Java 21
+ Java 21
 
-  Spring Boot 3.4.5
+ Spring Boot 3.4.5
 
  Spring Security
 
-  Spring Data JPA
+ Spring Data JPA
 
-  JWT (JSON Web Token)
+ JWT (JSON Web Token)
 
  PostgreSQL
 
@@ -41,7 +41,7 @@
  Swagger / OpenAPI 2.6.0 (springdoc)
 ```
 
-##  Project Structure
+## Project Structure
 
 ```
  src/main/java/com/lostfound/lostfound
@@ -56,7 +56,7 @@
 └── LostfoundApplication.java
 ```
 
-##  Authentication Flow 
+## Authentication Flow 
 
   1. User register via :- 
      ```
@@ -81,7 +81,7 @@
    ```
  
 
-### API Documentation
+## API Documentation
  Swagger Ui avaliable at :- 
    https://findme-1-e6k5.onrender.com/swagger-ui/index.html#/
 
@@ -103,7 +103,7 @@
     ```
 
 
- #### Run Locally
+ ## Run Locally
 
 1️⃣ Clone Repository
 
@@ -140,9 +140,9 @@
  Unit & integration tests
 ```
 
-## 👨‍💻 Author
+##  Author
 ```
   Developed by Kalkidan Kelemework
 
   Backend Developer | Spring Boot | REST APIs | Cloud Deployment
-```
+``
