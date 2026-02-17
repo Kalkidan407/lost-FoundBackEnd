@@ -58,12 +58,12 @@
 
 ## Authentication Flow 
 
-  1. User register via :- 
+  1. User register via  
      ```
       POST /api/auth/register
      ```
 
- 2. User login via :- 
+ 2. User login via 
   ```
     POST /api/auth/login
   ``` 
@@ -75,7 +75,8 @@
 ```
 
 
-4. Use token in requests:
+4. Use token in requests
+5. 
    ```
    Authorization: Bearer <your_token>
    ```
@@ -143,6 +144,5 @@
 ##  Author
 ```
   Developed by Kalkidan Kelemework
-
   Backend Developer | Spring Boot | REST APIs | Cloud Deployment
-``
+```
