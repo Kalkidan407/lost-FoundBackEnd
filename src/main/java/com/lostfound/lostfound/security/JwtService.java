@@ -24,7 +24,7 @@ public class JwtService {
         
     }
 
-    // ✅ Generate token
+ 
     public String generateToken(String email) {
 
         return Jwts.builder()
@@ -35,12 +35,12 @@ public class JwtService {
                 .compact();
     }
 
-    // ✅ Extract email
+  
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
     }
 
-    // ✅ Validate token
+   
     public boolean isTokenValid(String token, String email) {
         String username = extractUsername(token);
         return username.equals(email) && !isTokenExpired(token);
