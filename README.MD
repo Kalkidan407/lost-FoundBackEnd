@@ -52,7 +52,7 @@
 ├── repository/      # JPA repositories
 ├── model/           # Entities
 ├── dto/             # Data Transfer Objects
-├── security/        # JWT filter & utilities
+├── security/        # JWT filter & utilities custom implementation
 └── LostfoundApplication.java
 ```
 
