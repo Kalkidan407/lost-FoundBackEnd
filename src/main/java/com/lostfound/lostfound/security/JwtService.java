@@ -14,7 +14,6 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    // 🔐 Use a long random secret key (minimum 256 bits)
     private static final String SECRET_KEY =
             "myverysecuresecretkeymyverysecuresecretkey";
 
