@@ -103,11 +103,12 @@ public UserResponse getUserByUsername(String username) {
     public void deleteUserById(Long id){
         userRepository.deleteById(id);
     }
+    
     public void deleteAllUsers(){
         userRepository.deleteAll();
     }
 
-    public UserResponse updateUser(Long id, UserRequest updatedUser){
+    public UserResponse updateUser(Long id, UserRequest updatedUser) {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("User name not found with" + id));
          

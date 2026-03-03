@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(title = "LostFound API", version = "1.0"),
         security = @SecurityRequirement(name = "bearerAuth")
 )
+
 @SecurityScheme(
         name = "bearerAuth",
         description = "JWT Authentication",
@@ -21,5 +22,5 @@ import org.springframework.context.annotation.Configuration;
         bearerFormat = "JWT",
         in = SecuritySchemeIn.HEADER
 )
-public class OpenApiConfig {
-}
+
+public class OpenApiConfig {}
