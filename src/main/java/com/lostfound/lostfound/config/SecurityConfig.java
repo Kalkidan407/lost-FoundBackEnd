@@ -14,6 +14,7 @@ public class SecurityConfig {
     
      @Bean
      public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        
          http
             .csrf(csrf -> csrf.disable())
             .sessionManagement(
@@ -23,7 +24,7 @@ public class SecurityConfig {
                 )
             )
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/report/**").hasRole("USER")
+             
                 .requestMatchers(
                     "/api/auth/**",
                     
