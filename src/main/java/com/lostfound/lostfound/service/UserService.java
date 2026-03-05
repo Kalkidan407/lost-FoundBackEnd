@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.dto.user.UserRequest;
 import com.lostfound.lostfound.dto.user.UserResponse;
+import com.lostfound.lostfound.model.Role;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.repository.UserRepository;
 
@@ -20,8 +21,9 @@ public class UserService {
     
     private final UserRepository userRepository;
 
-    private UserResponse toDTO(User user){
-        UserResponse dto = new UserResponse();
+    private UserResponse toDTO(User user) {
+
+UserResponse dto = new UserResponse();
 dto.setName(user.getUsername());
 dto.setEmail(user.getEmail());
 //dto.setRole(user.getRole());
@@ -46,6 +48,7 @@ List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems(
      user.setUsername(request.getName());
      user.setEmail(request.getEmail());
      user.setPassword(request.getPassword());
+     user.setRole(Role.USER);
      return user;
     
     }
