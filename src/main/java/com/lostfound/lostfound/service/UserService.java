@@ -1,9 +1,15 @@
 package com.lostfound.lostfound.service;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Optional;
 
+
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.lostfound.lostfound.dto.item.ItemResponse;
@@ -20,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     private UserResponse toDTO(User user) {
 
@@ -47,7 +54,11 @@ List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems(
      User user = new User();
      user.setUsername(request.getName());
      user.setEmail(request.getEmail());
-     user.setPassword(request.getPassword());
+     user.setPassword(
+        passwordEncoder.encode(
+        request.getPassword()
+        )
+    );
      user.setRole(Role.USER);
      return user;
     
@@ -82,14 +93,6 @@ public UserResponse getUserByUsername(String username) {
     }
 
 
-    public UserResponse getUserPassword(String username) {
-       
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return toDTO(user);
-    }
-
-
-
     public void saveUser(com.lostfound.lostfound.model.User user) {
         userRepository.save(user);
     }
@@ -112,16 +115,56 @@ public UserResponse getUserByUsername(String username) {
     }
 
     public UserResponse updateUser(Long id, UserRequest updatedUser) {
+
+        
+
         User user = userRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("User name not found with" + id));
+                () -> new RuntimeException("User not found with" + id)
+        );
          
                 user.setUsername(updatedUser.getName());
                 user.setEmail(updatedUser.getEmail());
-                user.setPassword(updatedUser.getPassword());
+               
+                  if(updatedUser.getPassword() != null){
+        user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+    }
 
                 User save = userRepository.save(user);
               
       return toDTO(save);
     }
+
+
+
+
+    public UserResponse update(Long id, UserRequest updatedUser) throws AccessDeniedException {
+
+    Authentication auth = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+           
+    String currentEmail = auth.getName();
+
+    User currentUser = userRepository.findByEmail(currentEmail)
+            .orElseThrow();
+
+    boolean isAdmin = currentUser.getRole() == Role.ADMIN;
+
+    if (!currentUser.getId().equals(id) && !isAdmin) {
+        throw new AccessDeniedException("Not allowed");
+    }
+
+    User user = userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+    user.setUsername(updatedUser.getName());
+    user.setEmail(updatedUser.getEmail());
+
+    if(updatedUser.getPassword() != null){
+        user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+    }
+
+    User saved = userRepository.save(user);
+
+    return toDTO(saved);
+}
 
 }

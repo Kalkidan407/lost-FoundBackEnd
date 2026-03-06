@@ -45,7 +45,7 @@ public class CategoryItem {
      @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteCategoryById(@PathVariable Long id){
       categoryService.deleteCategoryById(id);
-      return ResponseEntity.ok("Category deteted successfully with id" + id);
+      return ResponseEntity.ok("Category deleted successfully with id" + id);
     }
     
   @DeleteMapping("/deleteAll")

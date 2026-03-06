@@ -3,6 +3,7 @@ package com.lostfound.lostfound.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ private final UserService userService;
 
 @GetMapping
 @ResponseStatus(HttpStatus.OK)
+@PreAuthorize("hasRole('ADMIN')")
    public List<UserResponse> getAlUsers() {
        return userService.getAllUser();
    }
@@ -54,12 +56,6 @@ private final UserService userService;
 @ResponseStatus(HttpStatus.OK)
     public UserResponse getUserByUsername(@PathVariable String name) {
         return userService.getUserByUsername(name);
-  }
-
-  @GetMapping("/password/{username}")
-  @ResponseStatus(HttpStatus.OK)
-    public UserResponse getUserPassword(@PathVariable String username) {
-        return userService.getUserPassword(username);
   }
 
   @DeleteMapping("/delete/{id}")

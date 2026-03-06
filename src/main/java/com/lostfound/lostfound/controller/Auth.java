@@ -33,6 +33,7 @@ public class Auth{
         user.setPassword(
                 passwordEncoder.encode(request.getPassword())
         );
+        
         user.setRole(Role.USER);
         userRepository.save(user);
         return "User registered successfully";
