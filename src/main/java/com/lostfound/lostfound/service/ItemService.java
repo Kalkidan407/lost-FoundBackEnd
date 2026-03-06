@@ -1,7 +1,12 @@
 package com.lostfound.lostfound.service;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.lostfound.lostfound.dto.item.ItemRequest;
@@ -25,13 +30,23 @@ public class ItemService {
     private final CategoryRepository categoryRepo;
     private final LocationRepository locationRepo;
 
+    private User getCurrentUser() {
+      
+    Authentication auth = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+    String email = auth.getName();
+
+    return userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+
     // --------------------------
     // Convert Entity -> Response DTO, /get/
     // --------------------------
 
 private ItemResponse toDTO(Item item) {
     ItemResponse dto = new ItemResponse();
-    dto.setId(item.getId());
+  
     dto.setName(item.getName());
     dto.setDescription(item.getDescription());
     dto.setPhotoUrl(item.getPhotoUrl());
@@ -97,7 +112,10 @@ private ItemResponse toDTO(Item item) {
     }
 
     public ItemResponse addItem(ItemRequest dto) {
+      User currentUser = getCurrentUser();
+
         Item item = fromDTO(dto);
+         item.setUser(currentUser);
         Item savedItem = itemRepository.save(item);
         return toDTO(savedItem);
     }
@@ -108,33 +126,51 @@ private ItemResponse toDTO(Item item) {
                 .orElseThrow(() -> new RuntimeException("Item not found"));
     }
 
+  
+
     public void deleteItemById(Long id){
-        itemRepository.deleteById(id);
+
+    Item item = itemRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Item not found"));
+
+    User currentUser = getCurrentUser();
+
+    boolean isAdmin = currentUser.getRole().name().equals("ADMIN");
+
+    boolean isOwner = item.getUser().getId().equals(currentUser.getId());
+
+    if(!isAdmin && !isOwner){
+        throw new RuntimeException("You are not allowed to delete this item");
     }
 
+    itemRepository.delete(item);
+}
+
+
+   @PreAuthorize("hasRole('ADMIN')")
     public void deleteAllItems(){
         itemRepository.deleteAll();
     }
 
     public ItemResponse updateItem(Long id, ItemRequest dto){
-        return itemRepository.findById(id)
-                .map(item -> {
-                    item.setName(dto.getName());
-                    item.setDescription(dto.getDescription());
-                    item.setPhotoUrl(dto.getPhotoUrl());
 
-                    // update relationships
-                    item.setUser(userRepository.findById(dto.getUserId())
-                        .orElseThrow(() -> new RuntimeException("User not found")));
+Item item = itemRepository.findById(id)
+          .orElseThrow(() -> new RuntimeException("Item not found"));
 
-                    item.setCategory(categoryRepo.findById(dto.getCategoryId())
-                        .orElseThrow(() -> new RuntimeException("Category not found")));
+   User currentUser = getCurrentUser();  
+   boolean isAdmin = currentUser.getRole().name().equals("ADMIN");    
+   boolean isOwner = item.getUser().getId().equals(currentUser.getId());
+   
+   if(!isAdmin && !isOwner){
+    throw new RuntimeException("Not allowed to update this item");
+   }
 
-                    item.setLocation(locationRepo.findById(dto.getLocationId())
-                        .orElseThrow(() -> new RuntimeException("Location not found")));
+   item.setName(dto.getName());
+   item.setDescription(dto.getDescription());
+   item.setPhotoUrl(dto.getPhotoUrl());
+   Item updated = itemRepository.save(item);
 
-                    Item updated = itemRepository.save(item);
-                    return toDTO(updated);
-                }).orElseThrow(() -> new RuntimeException("Item not found"));
-    }
+        return toDTO(updated);
+}
+
 }
