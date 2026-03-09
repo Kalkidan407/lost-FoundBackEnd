@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import com.lostfound.lostfound.dto.item.ItemRequest;
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.service.ItemService;
-
 import lombok.RequiredArgsConstructor;
 
 @RestController 
 @RequiredArgsConstructor
 @RequestMapping("/api/items")
-
 
 public class Item{
 
@@ -35,14 +33,12 @@ public class Item{
         return ResponseEntity.ok(itemService.getAllItems());
     }
 
-
     @GetMapping("/{id}")
        @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ItemResponse> getItemById(@PathVariable Long id) {
         return ResponseEntity.ok(itemService.getItemById(id));
     }
 
-  
     @DeleteMapping("delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteItem(@PathVariable Long id) {
@@ -59,7 +55,7 @@ public class Item{
 
 
     @PutMapping("/update/{id}")
-      @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ItemResponse> updateItem(
             @PathVariable Long id,
             @RequestBody ItemRequest dto) {

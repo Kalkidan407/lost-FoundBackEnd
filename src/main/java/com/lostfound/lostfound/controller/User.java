@@ -27,13 +27,14 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+
 public class User {
     
 private final UserService userService;
 
 @PostMapping("/create")
 @ResponseStatus(HttpStatus.CREATED)
-  public UserResponse createUser(@Valid @RequestBody UserRequest user){
+  public UserResponse createUser(@Valid @RequestBody UserRequest user) {
     return userService.createUser(user);
   }
 
@@ -59,7 +60,7 @@ private final UserService userService;
   }
 
   @DeleteMapping("/delete/{id}")
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteUserById(@PathVariable Long id){
     userService.deleteUserById(id);

@@ -24,7 +24,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "report")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Report {
@@ -48,10 +47,6 @@ private String message;
  private String reportType; // "FOUND" or "CLAIM" or "LOST"
 
 private LocalDateTime createdAt = LocalDateTime.now();
-
-
-
- 
 
     
 }

@@ -37,12 +37,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                  System.out.println("NO AUTH HEADER");
+
             filterChain.doFilter(request, response);
             return;
         }
 
-        String jwt = authHeader.substring(7);
+        String jwt = authHeader.substring(7).trim();
         String email = jwtService.extractUsername(jwt);
+
 System.out.println("Extracted Email: " + email);
 
          System.out.println("TOKEN USER: " + email);

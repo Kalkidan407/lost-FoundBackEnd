@@ -21,7 +21,6 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "location")
