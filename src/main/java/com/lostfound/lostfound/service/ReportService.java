@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ReportService {
+  
   private final ReportRepository reportRepository;
   private final UserRepository userRepository;
   private final LocationRepository locationRepository;

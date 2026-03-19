@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
+  
     private final CategoryRepository categoryRepository;
 
 private CategoryResponse toDTO(Category category){
