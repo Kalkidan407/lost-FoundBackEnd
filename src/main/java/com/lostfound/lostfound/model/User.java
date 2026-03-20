@@ -61,9 +61,4 @@ private Role role;
  private List<Report> reports;
 
 
-
-
-
-
-
 }
