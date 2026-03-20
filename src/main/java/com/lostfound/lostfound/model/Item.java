@@ -63,7 +63,7 @@ private User user;
 
      @Enumerated(EnumType.STRING) 
      @Column(nullable = false, unique = true)
-    private boolean status;
+    private Status status;
 
  
 

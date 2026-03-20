@@ -50,7 +50,7 @@ private ItemResponse toDTO(Item item) {
     dto.setName(item.getName());
     dto.setDescription(item.getDescription());
     dto.setPhotoUrl(item.getPhotoUrl());
-    dto.setStatus(item.isStatus());
+   
     if (item.getUser() != null) {
         dto.setUserId(item.getUser().getId());
         dto.setUserName(item.getUser().getUsername());
@@ -78,7 +78,7 @@ private ItemResponse toDTO(Item item) {
         item.setName(dto.getName());
         item.setDescription(dto.getDescription());
         item.setPhotoUrl(dto.getPhotoUrl());
-        item.setStatus(false); 
+        item.setStatus(null);; 
 
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
