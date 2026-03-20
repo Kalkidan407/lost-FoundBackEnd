@@ -22,7 +22,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
 
-    @SuppressWarnings("null")
+ @SuppressWarnings("null")
 @Override
     protected void doFilterInternal(
         
@@ -36,6 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                
                  System.out.println("NO AUTH HEADER");
 
             filterChain.doFilter(request, response);

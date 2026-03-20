@@ -14,6 +14,7 @@ import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.model.Item;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.model.Location;
+import com.lostfound.lostfound.model.Status;
 import com.lostfound.lostfound.model.Category;
 import com.lostfound.lostfound.repository.UserRepository;
 import com.lostfound.lostfound.repository.CategoryRepository;
@@ -78,7 +79,7 @@ private ItemResponse toDTO(Item item) {
         item.setName(dto.getName());
         item.setDescription(dto.getDescription());
         item.setPhotoUrl(dto.getPhotoUrl());
-        item.setStatus(null);; 
+        item.setStatus(Status.FOUND);
 
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
