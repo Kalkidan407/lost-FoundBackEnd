@@ -41,7 +41,7 @@ private final UserService userService;
 
 @GetMapping
 @ResponseStatus(HttpStatus.OK)
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
    public List<UserResponse> getAlUsers() {
        return userService.getAllUser();
    }
