@@ -1,4 +1,6 @@
 package com.lostfound.lostfound.dto.item;
+import com.lostfound.lostfound.model.Status;
+
 import lombok.*;
 
 @Data
@@ -10,7 +12,7 @@ public class ItemResponse {
     private String name;
     private String description;
     private String photoUrl;
-    private boolean status;
+    private  Status status;
 
     private Long userId;
     private String userName;
