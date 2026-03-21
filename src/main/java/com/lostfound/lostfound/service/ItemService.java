@@ -148,7 +148,7 @@ private ItemResponse toDTO(Item item) {
 }
 
 
-   @PreAuthorize("hasRole('ROLE_ADMIN')")
+ 
     public void deleteAllItems(){
         itemRepository.deleteAll();
     }

@@ -52,7 +52,6 @@ location.setLongitude(request.getLongitude());
 }
 
 
-// service  methods //
 
   public LocationResponse addLocation(LocationRequest dto) {
 
@@ -64,8 +63,6 @@ location.setLongitude(request.getLongitude());
     }
 
    public List<LocationResponse> getAllLocations(){
-   
-    // fetch entity from DB 
     List<Location> location = locationRepository.findAll();
     return location.stream().map( this:: toDTO)//convert each Entity to Response to DTO
     .toList();
