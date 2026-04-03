@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class Auth{
+public class AuthController{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -26,7 +26,6 @@ public class Auth{
 
     @PostMapping("/register")
     public String register(@RequestBody RegisterRequest request) {
-        
         User user = new User();
         user.setUsername(request.getUserName());
         user.setEmail(request.getEmail());
@@ -49,8 +48,11 @@ public class Auth{
                 )
         );
 
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
         String token =
-                jwtService.generateToken(request.getEmail());
+                jwtService.generateToken(user);
 
         return new AuthResponse(token);
     }

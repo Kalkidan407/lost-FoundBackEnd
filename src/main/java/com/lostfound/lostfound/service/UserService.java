@@ -4,8 +4,6 @@ import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Optional;
 
-
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,15 +26,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private UserResponse toDTO(User user) {
+private UserResponse toDTO(User user) {
+ UserResponse dto = new UserResponse();
+ dto.setName(user.getUsername());
+ dto.setEmail(user.getEmail());
+ dto.setRole(user.getRole());
+ dto.setId(user.getId());
 
-UserResponse dto = new UserResponse();
-dto.setName(user.getUsername());
-dto.setEmail(user.getEmail());
-//dto.setRole(user.getRole());
-dto.setId(user.getId());
-
-List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems().stream().map(
+List<ItemResponse> itemDtos = user.getItems() == null ? List.of(): user.getItems().stream().map(
     item -> {
         ItemResponse itemDto = new ItemResponse();
         itemDto.setId(item.getId());
@@ -46,11 +43,10 @@ List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems(
 
     dto.setItems(itemDtos);
         return dto;
-
     }
 
-    private User fromDTO(UserRequest request){
-        if (request == null) {return null; } 
+private User fromDTO(UserRequest request) {
+    if (request == null) { return null; } 
      User user = new User();
      user.setUsername(request.getName());
      user.setEmail(request.getEmail());
@@ -60,7 +56,7 @@ List<ItemResponse> itemDtos = user.getItems()== null ? List.of(): user.getItems(
         )
     );
      user.setRole(Role.USER);
-     return user;
+ return user;
     
     }
 
@@ -114,36 +110,18 @@ public UserResponse getUserByUsername(String username) {
         userRepository.deleteAll();
     }
 
-    public UserResponse updateUser(Long id, UserRequest updatedUser) {
-
-        
-
-        User user = userRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("User not found with" + id)
-        );
-         
-                user.setUsername(updatedUser.getName());
-                user.setEmail(updatedUser.getEmail());
-               
-                  if(updatedUser.getPassword() != null){
-        user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-    }
-
-                User save = userRepository.save(user);
-              
-      return toDTO(save);
-    }
+ 
 
 
 
 
-    public UserResponse update(Long id, UserRequest updatedUser) throws AccessDeniedException {
+    public UserResponse updateUser(Long id, UserRequest updatedUser) throws AccessDeniedException {
 
     Authentication auth = (Authentication) SecurityContextHolder.getContext().getAuthentication();
            
-    String currentEmail = auth.getName();
+    String currentName = auth.getName();
 
-    User currentUser = userRepository.findByEmail(currentEmail)
+    User currentUser = userRepository.findByUsername(currentName)
             .orElseThrow();
 
     boolean isAdmin = currentUser.getRole() == Role.ADMIN;

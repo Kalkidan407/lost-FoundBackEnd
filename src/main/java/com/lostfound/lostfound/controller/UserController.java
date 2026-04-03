@@ -21,6 +21,8 @@ import com.lostfound.lostfound.dto.user.UserResponse;
 
 import com.lostfound.lostfound.service.UserService;
 
+import java.nio.file.AccessDeniedException;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -28,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 
-public class User {
+public class UserController {
     
 private final UserService userService;
 
@@ -42,7 +44,7 @@ private final UserService userService;
 @GetMapping
 @ResponseStatus(HttpStatus.OK)
 //@PreAuthorize("hasRole('ADMIN')")
-   public List<UserResponse> getAlUsers() {
+   public List<UserResponse> getAllUsers() {
        return userService.getAllUser();
    }
 
@@ -60,7 +62,7 @@ private final UserService userService;
   }
 
   @DeleteMapping("/delete/{id}")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PreAuthorize("hasRole('ADMIN')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteUserById(@PathVariable Long id){
     userService.deleteUserById(id);
@@ -68,7 +70,8 @@ private final UserService userService;
     
      @PutMapping("/update/{id}")
      @ResponseStatus(HttpStatus.OK)
-    public UserResponse updateCategory(@PathVariable Long id, @RequestBody UserRequest updatedUser){
+     @PreAuthorize("hasRole('ADMIN')")
+    public UserResponse updateCategory(@PathVariable Long id, @RequestBody UserRequest updatedUser) throws AccessDeniedException {
       return userService.updateUser(id, updatedUser);
     }
    

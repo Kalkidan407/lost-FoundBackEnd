@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/report")
-public class ReportItem  {
+public class ReportItemController  {
 
     public final ReportService reportService;
     

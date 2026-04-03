@@ -6,6 +6,8 @@ import java.util.Date;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.lostfound.lostfound.model.User;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,17 +26,17 @@ public class JwtService {
         
     }
 
-    
-    public String generateToken(String email) {
 
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hr
-                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-                .compact();
-    }
 
+    public String generateToken(User user) {
+      return Jwts.builder()
+        .setSubject(user.getEmail())
+        .claim("role", user.getRole().name()) 
+        .setIssuedAt(new Date())
+        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
+        .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+        .compact();
+}
   
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();

@@ -2,11 +2,17 @@ package com.lostfound.lostfound.security;
 
 
 import java.io.IOException;
+import java.util.List;
+
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -21,14 +27,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
+    private static final  Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
  @SuppressWarnings("null")
 @Override
     protected void doFilterInternal(
-        
             HttpServletRequest request,
             HttpServletResponse response,
-            FilterChain filterChain)
+            FilterChain filterChain  )
             throws ServletException, IOException {
 
                 System.out.println("JWT FILTER EXECUTED");
@@ -36,33 +42,34 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                
-                 System.out.println("NO AUTH HEADER");
+
+                 logger.warn("NO AUTH HEADER");
 
             filterChain.doFilter(request, response);
             return;
         }
 
         String jwt = authHeader.substring(7).trim();
+
         String email = jwtService.extractUsername(jwt);
 
-System.out.println("Extracted Email: " + email);
-
-         System.out.println("TOKEN USER: " + email);
+           logger.debug("Extracted Email: {email}");
 
         if (email != null
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails =
                     userDetailsService.loadUserByUsername(email);
+                    
+        //  SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);  
 
-            if (jwtService.isTokenValid(jwt, userDetails)) {
+            if (jwtService.isTokenValid( jwt, userDetails )) {
 
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,
-                                null,
-                                userDetails.getAuthorities()
+                                null
+                                // List.of(authority)
                         );
 
                 authToken.setDetails(
@@ -73,6 +80,7 @@ System.out.println("Extracted Email: " + email);
                 SecurityContextHolder.getContext()
                         .setAuthentication(authToken);
             }
+
         }
 
         filterChain.doFilter(request, response);

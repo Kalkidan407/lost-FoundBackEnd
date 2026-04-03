@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/location")
-public class Location {
+public class LocationController {
 
     private final LocationService locationService;
 
@@ -35,7 +35,7 @@ public class Location {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<LocationResponse> getAllLocations(){
+    public List<LocationResponse> getAllLocations() {
         return locationService.getAllLocations();
     }
 

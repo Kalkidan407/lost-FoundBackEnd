@@ -43,7 +43,6 @@ private User user;
     @JoinColumn(name = "category_id")
     private Category category;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     private Location location;
@@ -54,7 +53,6 @@ private User user;
     @Column(nullable = false )
     private String name;
 
- 
     @Column(nullable = false,  length = 2000)
     private String description;
 
@@ -69,3 +67,13 @@ private User user;
 
   
 }
+
+// Claims claims = Jwts.parserBuilder()
+//         .setSigningKey(key)
+//         .build()
+//         .parseClaimsJws(token)
+//         .getBody();
+
+//private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+
+//logger.debug("JWT FILTER EXECUTED");
