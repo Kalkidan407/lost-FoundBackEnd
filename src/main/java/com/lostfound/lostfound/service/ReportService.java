@@ -120,8 +120,6 @@ public ReportResponse getReportById(Long id) {
             .orElseThrow(() -> new RuntimeException("Report not found"));
 }
 
-
-
  
   public void deleteAllReport(){
     reportRepository.deleteAll();
