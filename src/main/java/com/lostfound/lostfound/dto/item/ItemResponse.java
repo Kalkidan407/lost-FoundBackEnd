@@ -3,7 +3,8 @@ import com.lostfound.lostfound.model.Status;
 
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemResponse {

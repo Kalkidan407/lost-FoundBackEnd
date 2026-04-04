@@ -25,7 +25,8 @@ public class AuthController{
     private final JwtService jwtService;
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
+    public String register( @RequestBody RegisterRequest request ) {
+
         User user = new User();
         user.setUsername(request.getUserName());
         user.setEmail(request.getEmail());
@@ -39,7 +40,7 @@ public class AuthController{
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
+    public AuthResponse login( @RequestBody LoginRequest request ) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -55,7 +56,9 @@ public class AuthController{
                 jwtService.generateToken(user);
 
         return new AuthResponse(token);
+        
     }
+
 
 }
 
