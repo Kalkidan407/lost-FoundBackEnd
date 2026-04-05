@@ -67,6 +67,7 @@ private final UserService userService;
   public void deleteUserById(@PathVariable Long id){
     userService.deleteUserById(id);
   }
+  
     
      @PutMapping("/update/{id}")
      @ResponseStatus(HttpStatus.OK)
@@ -75,7 +76,5 @@ private final UserService userService;
       return userService.updateUser(id, updatedUser);
     }
    
-
-    
     
 }

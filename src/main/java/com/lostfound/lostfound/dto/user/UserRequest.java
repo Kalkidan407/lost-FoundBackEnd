@@ -13,6 +13,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest {

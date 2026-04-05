@@ -66,9 +66,10 @@ private User fromDTO(UserRequest request) {
         return toDTO(saved);
      }
 
-    public boolean isUsernameTaken(String username) {
-        return userRepository.findByUsername(username) != null;
-    }
+    // public boolean isUsernameTaken(String username) {
+    
+    //     return userRepository.findByUsername(username) != null;
+    // }
     
 
     public UserResponse getUsersById(Long id){
