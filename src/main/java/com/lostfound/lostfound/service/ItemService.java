@@ -81,10 +81,10 @@ private ItemResponse toDTO(Item item) {
         item.setPhotoUrl(dto.getPhotoUrl());
         item.setStatus(Status.FOUND);
 
-        User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        // User user = userRepository.findById(dto.getUserId())
+        //         .orElseThrow(() -> new RuntimeException("User not found"));
                 
-        item.setUser(user);
+        // item.setUser(user);
 
         Category category = categoryRepo.findById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -136,13 +136,13 @@ private ItemResponse toDTO(Item item) {
 
     User currentUser = getCurrentUser();
 
-    boolean isAdmin = currentUser.getRole().name().equals("ADMIN");
+    // boolean isAdmin = currentUser.getRole().name().equals("ADMIN");
 
-    boolean isOwner = item.getUser().getId().equals(currentUser.getId());
+    // boolean isOwner = item.getUser().getId().equals(currentUser.getId());
 
-    if(!isAdmin && !isOwner){
-        throw new RuntimeException("You are not allowed to delete this item");
-    }
+    // if(!isAdmin && !isOwner){
+    //     throw new RuntimeException("You are not allowed to delete this item");
+    // }
 
     itemRepository.delete(item);
 }

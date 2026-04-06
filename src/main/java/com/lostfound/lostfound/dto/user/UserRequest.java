@@ -27,6 +27,4 @@ public class UserRequest {
     @Size(min=6)
     private String password;
  
-    
-    
 }

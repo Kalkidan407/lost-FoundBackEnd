@@ -146,3 +146,90 @@
   Developed by Kalkidan Kelemework
   Backend Developer | Spring Boot | REST APIs | Cloud Deployment
 ```
+
+
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.location.LocationResponse
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/LocationService.java:[46,29] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getName()
+#14 15.56 [ERROR]   location: variable request of type com.lostfound.lostfound.dto.location.LocationRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/LocationService.java:[47,29] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getLatitude()
+#14 15.56 [ERROR]   location: variable request of type com.lostfound.lostfound.dto.location.LocationRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/LocationService.java:[48,30] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getLongitude()
+#14 15.56 [ERROR]   location: variable request of type com.lostfound.lostfound.dto.location.LocationRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/LocationService.java:[91,36] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getName()
+#14 15.56 [ERROR]   location: variable updateedLocation of type com.lostfound.lostfound.dto.location.LocationRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/LocationService.java:[92,40] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getLatitude()
+#14 15.56 [ERROR]   location: variable updateedLocation of type com.lostfound.lostfound.dto.location.LocationRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/LocationService.java:[93,40] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getLongitude()
+#14 15.56 [ERROR]   location: variable updateedLocation of type com.lostfound.lostfound.dto.location.LocationRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[32,21] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getId()
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[33,26] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getMessage()
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[35,13] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getUser()
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[37,19] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getUser()
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[38,21] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getUser()
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[39,22] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getUser()
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[40,8] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method setReportedBy(com.lostfound.lostfound.dto.user.UserResponse)
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.report.ReportResponse
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[50,28] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getMessage()
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.report.ReportRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[51,31] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getReportType()
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.report.ReportRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[54,43] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getReportedById()
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.report.ReportRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[56,11] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method setUser(com.lostfound.lostfound.model.User)
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[59,43] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getReportedItemId()
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.report.ReportRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[61,11] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method setItem(com.lostfound.lostfound.model.Item)
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[93,26] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getMessage()
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.report.ReportRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[95,12] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getReportedItemId()
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.report.ReportRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[96,48] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method getReportedItemId()
+#14 15.56 [ERROR]   location: variable dto of type com.lostfound.lostfound.dto.report.ReportRequest
+#14 15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[98,15] cannot find symbol
+#14 15.56 [ERROR]   symbol:   method setItem(com.lostfound.lostfound.model.Item)
+#14 15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+#14 15.56 [ERROR] -> [Help 1]
+#14 15.56 [ERROR] 
+#14 15.56 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+#14 15.56 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+#14 15.56 [ERROR] 
+#14 15.56 [ERROR] For more information about the errors and possible solutions, please read the following articles:
+#14 15.56 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+#14 ERROR: process "/bin/sh -c mvn clean package -DskipTests" did not complete successfully: exit code: 1
+------
+ > [build 5/5] RUN mvn clean package -DskipTests:
+15.56 [ERROR] /app/src/main/java/com/lostfound/lostfound/service/ReportService.java:[98,15] cannot find symbol
+15.56 [ERROR]   symbol:   method setItem(com.lostfound.lostfound.model.Item)
+15.56 [ERROR]   location: variable report of type com.lostfound.lostfound.model.Report
+15.56 [ERROR] -> [Help 1]
+

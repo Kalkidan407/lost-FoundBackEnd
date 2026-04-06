@@ -50,12 +50,11 @@ public class ReportService {
       report.setMessage(dto.getMessage());
       report.setReportType(dto.getReportType());
       
-   // Fetch and set User (reportedBy)
+  
    User user = userRepository.findById(dto.getReportedById())
             .orElseThrow(() -> new RuntimeException("User not found"));
     report.setUser(user);
 
-    // Fetch and set Item (reportedItem)
   Item item =  itemRepository.findById(dto.getReportedItemId())
             .orElseThrow(() -> new RuntimeException("Item not found"));
     report.setItem(item);
