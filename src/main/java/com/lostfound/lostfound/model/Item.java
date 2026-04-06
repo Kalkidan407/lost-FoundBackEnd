@@ -63,17 +63,6 @@ private User user;
      @Column(nullable = false, unique = true)
     private Status status;
 
- 
-
   
 }
 
-// Claims claims = Jwts.parserBuilder()
-//         .setSigningKey(key)
-//         .build()
-//         .parseClaimsJws(token)
-//         .getBody();
-
-//private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
-
-//logger.debug("JWT FILTER EXECUTED");
