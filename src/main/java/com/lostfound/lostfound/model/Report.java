@@ -22,7 +22,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@Data
+
 
 @Entity
 
