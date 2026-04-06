@@ -18,10 +18,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Entity
-
 @Setter
 @Getter
+
+@Entity
+
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "location")

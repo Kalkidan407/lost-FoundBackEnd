@@ -12,11 +12,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@Data
+
 public class UserResponse {
     
     private Long id;

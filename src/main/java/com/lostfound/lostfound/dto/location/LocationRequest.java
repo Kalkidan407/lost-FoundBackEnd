@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
+
 @AllArgsConstructor
 public class LocationRequest {
  

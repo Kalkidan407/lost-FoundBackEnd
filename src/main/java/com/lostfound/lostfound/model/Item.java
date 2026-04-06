@@ -25,9 +25,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Setter
 @Getter
+@Entity
+
 @Table( name ="item")
 public class Item {
 

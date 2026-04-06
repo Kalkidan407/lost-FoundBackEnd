@@ -20,10 +20,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Setter
 @Getter
 @Data
+
+@Entity
+
 @Table(name = "report")
 @NoArgsConstructor
 @AllArgsConstructor
