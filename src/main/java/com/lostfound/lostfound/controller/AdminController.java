@@ -14,8 +14,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
-public class Admin {
 
+public class AdminController {
+
+    
     private final UserService userService;
 
     @DeleteMapping("/users/{id}")
