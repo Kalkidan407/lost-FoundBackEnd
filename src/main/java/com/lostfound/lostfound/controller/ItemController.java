@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.lostfound.lostfound.dto.item.ItemRequest;
@@ -47,6 +48,7 @@ public class ItemController{
     }
 
     @DeleteMapping("/deleteAll")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteAllItems() {
         itemService.deleteAllItems();

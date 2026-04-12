@@ -42,6 +42,14 @@ public class JwtService {
         return extractAllClaims(token).getSubject();
     }
 
+    public Claims extractAllClaims(String token){
+        return Jwts.parserBuilder()
+               .setSigningKey(getSignInKey())
+               .build()
+               .parseClaimsJws(token)
+               .getBody();
+    }
+
    
     public boolean isTokenValid(String token, UserDetails userDetails) {
         String username = extractUsername(token);
@@ -53,11 +61,5 @@ public class JwtService {
                 .before(new Date());
     }
 
-    private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSignInKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
+   
 }

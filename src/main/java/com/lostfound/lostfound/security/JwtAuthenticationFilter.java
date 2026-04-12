@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -53,6 +54,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String email = jwtService.extractUsername(jwt);
 
+        Claims claims = jwtService.extractAllClaims(jwt);
+       String role = claims.get("role", String.class); 
+
+
            logger.debug("Extracted Email: {email}");
 
         if (email != null
@@ -61,15 +66,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             UserDetails userDetails =
                     userDetailsService.loadUserByUsername(email);
                     
-        //  SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);  
+        
 
             if (jwtService.isTokenValid( jwt, userDetails )) {
+                  
+                SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
 
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,
-                                null
-                                // List.of(authority)
+                                null,
+                                List.of(authority)
                         );
 
                 authToken.setDetails(
