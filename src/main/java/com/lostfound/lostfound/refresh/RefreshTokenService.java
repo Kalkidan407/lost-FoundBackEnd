@@ -1,5 +1,6 @@
 package com.lostfound.lostfound.refresh;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +23,14 @@ public class RefreshTokenService {
 }
 
 
- 
+    public RefreshToken createRefreshToken(User user){
+        RefreshToken token = new RefreshToken();
+        token.setUser(user);
+        token.setToken(UUID.randomUUID().toString());
+        token.setExpireDate(LocalDateTime.now().plusDays(7));
+
+        return refreshTokenRepository.save(token);
+
+    }
     
 }

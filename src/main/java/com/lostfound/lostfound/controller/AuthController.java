@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import com.lostfound.lostfound.dto.*;
 import com.lostfound.lostfound.model.Role;
 import com.lostfound.lostfound.model.User;
+import com.lostfound.lostfound.refresh.RefreshToken;
+import com.lostfound.lostfound.refresh.RefreshTokenRepository;
+import com.lostfound.lostfound.refresh.RefreshTokenService;
 import com.lostfound.lostfound.repository.UserRepository;
 import com.lostfound.lostfound.security.JwtService;
 
@@ -23,6 +26,8 @@ public class AuthController{
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+
+    private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/register")
     public String register( @RequestBody RegisterRequest request ) {
@@ -55,9 +60,14 @@ public class AuthController{
         String accessToken =
                 jwtService.generateToken(user);
 
-        return new AuthResponse(accessToken);
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+        
+
+        return new AuthResponse(accessToken, refreshToken.getToken());
         
     }
+
+//     public AuthResponse refresh(@RequestBody )
 
 
 }
