@@ -38,6 +38,7 @@ List<ItemResponse> itemDtos = location.getItems()== null ? List.of(): location.g
 
 
 private Location fromDTO(LocationRequest request){
+    
     if (request == null) {
     return null;
 }

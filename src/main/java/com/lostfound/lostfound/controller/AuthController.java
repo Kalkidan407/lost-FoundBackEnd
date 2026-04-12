@@ -52,10 +52,10 @@ public class AuthController{
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        String token =
+        String accessToken =
                 jwtService.generateToken(user);
 
-        return new AuthResponse(token);
+        return new AuthResponse(accessToken);
         
     }
 
