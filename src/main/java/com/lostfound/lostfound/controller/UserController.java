@@ -62,7 +62,7 @@ private final UserService userService;
   }
 
   @DeleteMapping("/delete/{id}")
-  @PreAuthorize("hasRole('USER')")
+  @PreAuthorize("hasRole('ADMIN')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteUserById(@PathVariable Long id){
     userService.deleteUserById(id);
