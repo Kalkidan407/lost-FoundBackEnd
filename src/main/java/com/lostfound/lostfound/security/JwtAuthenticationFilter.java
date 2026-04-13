@@ -50,7 +50,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String jwt = authHeader;
+        String jwt = authHeader.substring(7).trim();
 
         String email = jwtService.extractUsername(jwt);
 
