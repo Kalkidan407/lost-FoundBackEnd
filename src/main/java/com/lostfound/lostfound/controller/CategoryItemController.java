@@ -50,7 +50,7 @@ public class CategoryItemController {
     }
     
   @DeleteMapping("/deleteAll")
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasRole('USER')")
    @ResponseStatus(HttpStatus.NO_CONTENT)
   public ResponseEntity<String> deleteAllCategories(){
     categoryService.deleteAllCategories();

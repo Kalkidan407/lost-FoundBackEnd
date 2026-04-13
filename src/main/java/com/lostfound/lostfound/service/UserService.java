@@ -55,7 +55,7 @@ private User fromDTO(UserRequest request) {
         request.getPassword()
         )
     );
-     user.setRole(Role.ADMIN);
+     user.setRole(Role.USER);
  return user;
     
     }

@@ -48,7 +48,7 @@ public class ItemController{
     }
 
     @DeleteMapping("/deleteAll")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteAllItems() {
         itemService.deleteAllItems();

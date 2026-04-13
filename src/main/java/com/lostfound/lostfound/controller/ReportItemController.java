@@ -43,7 +43,7 @@ public class ReportItemController  {
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
      @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deteteById (@PathVariable Long id){
        reportService.deleteReportById(id);
@@ -51,7 +51,7 @@ public class ReportItemController  {
     }
 
   @DeleteMapping("/deleteAll")
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasRole('USER')")
    @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteAllReport(){
     reportService.deleteAllReport();
