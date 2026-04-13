@@ -67,9 +67,22 @@ public class AuthController{
         
     }
 
-//     public AuthResponse refresh(@RequestBody )
+    @PostMapping("/refresh")
+public AuthResponse refresh(@RequestBody RefreshRequest request) {
+   
+    RefreshToken token = refreshTokenService.verifyToken(request.getRefreshToken());
+
+    String newAccessToken = jwtService.generateToken(token.getUser());
+
+    return new AuthResponse(newAccessToken, request.getRefreshToken());
+}
 
 
+  
+
+
+
+  
 }
 
 

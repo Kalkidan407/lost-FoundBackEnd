@@ -82,7 +82,7 @@ private User fromDTO(UserRequest request) {
         return userRepository.findByEmail(email) != null;
     }
 
-public UserResponse getUserByUsername(String username) {
+  public UserResponse getUserByUsername(String username) {
     User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> 
                           new UsernameNotFoundException("User not found")) ;
