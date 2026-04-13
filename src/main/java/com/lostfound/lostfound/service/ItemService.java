@@ -4,6 +4,7 @@ import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,9 @@ public class ItemService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepo;
     private final LocationRepository locationRepo;
+
+//     Pageable pageable = PageRequest.of(page, size);
+// return itemRepository.findAll(pageable).map(this::mapToResponse);
 
     private User getCurrentUser() {
       
