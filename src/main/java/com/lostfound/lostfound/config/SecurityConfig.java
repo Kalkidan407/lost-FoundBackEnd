@@ -16,7 +16,7 @@ import com.lostfound.lostfound.security.JwtAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
 @Configuration
-@EnableMethodSecurity
+
 @RequiredArgsConstructor
 public class SecurityConfig {
 
