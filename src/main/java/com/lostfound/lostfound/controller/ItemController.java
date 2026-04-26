@@ -32,6 +32,7 @@ public class ItemController{
        @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ItemResponse>> getAllItems() {
         return ResponseEntity.ok(itemService.getAllItems());
+        
     }
 
     @GetMapping("/{id}")
@@ -48,7 +49,7 @@ public class ItemController{
     }
 
     @DeleteMapping("/deleteAll")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteAllItems() {
         itemService.deleteAllItems();

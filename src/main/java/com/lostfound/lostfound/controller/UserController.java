@@ -62,7 +62,7 @@ private final UserService userService;
   }
 
   @DeleteMapping("/delete/{id}")
-  @PreAuthorize("hasRole('ADMIN')")
+  //@PreAuthorize("hasRole('ADMIN')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteUserById(@PathVariable Long id){
     userService.deleteUserById(id);
@@ -71,7 +71,7 @@ private final UserService userService;
     
      @PutMapping("/update/{id}")
      @ResponseStatus(HttpStatus.OK)
-     @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     public UserResponse updateCategory(@PathVariable Long id, @RequestBody UserRequest updatedUser) throws AccessDeniedException {
       return userService.updateUser(id, updatedUser);
     }

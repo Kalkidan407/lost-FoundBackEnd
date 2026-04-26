@@ -48,7 +48,7 @@ public class LocationController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteLocationById(@PathVariable Long id){
         locationService.deleteLocationById(id);
@@ -56,7 +56,7 @@ public class LocationController {
     }
 
     @DeleteMapping("/deleteAll")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> deleteAllLocations(){
         locationService.deleteAllLocations();
