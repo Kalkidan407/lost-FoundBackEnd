@@ -85,6 +85,7 @@ if (path.startsWith("/api/auth")) {
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
     }
+    logger.info("PATH: {}", request.getServletPath());
 
     filterChain.doFilter(request, response);
 }
