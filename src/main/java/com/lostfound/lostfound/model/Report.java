@@ -22,10 +22,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-
-
 @Entity
-
 @Table(name = "report")
 @NoArgsConstructor
 @AllArgsConstructor
