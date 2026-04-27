@@ -57,7 +57,7 @@ if (path.startsWith("/api/auth")) {
         return;
     }
 
-    try{
+    
 
     String jwt = authHeader.substring(7).trim();
 
@@ -85,11 +85,7 @@ if (path.startsWith("/api/auth")) {
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
     }
-} catch (Exception e) {
-    logger.error("JWT ERROR: {}", e.getMessage());
-    // ❗ Do NOT block request, just continue
-
- }     
+     
 
 
     filterChain.doFilter(request, response);
