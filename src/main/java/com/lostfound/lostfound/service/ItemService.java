@@ -157,7 +157,7 @@ private ItemResponse toDTO(Item item) {
         itemRepository.deleteAll();
     }
 
-    public ItemResponse updateItem(Long id, ItemRequest dto){
+public ItemResponse updateItem(Long id, ItemRequest dto){
 
 Item item = itemRepository.findById(id)
           .orElseThrow(() -> new RuntimeException("Item not found"));
@@ -166,7 +166,7 @@ Item item = itemRepository.findById(id)
    boolean isAdmin = currentUser.getRole().name().equals("ADMIN");    
    boolean isOwner = item.getUser().getId().equals(currentUser.getId());
    
-   if(!isAdmin && !isOwner){
+   if(!isAdmin && !isOwner) {
     throw new RuntimeException("Not allowed to update this item");
    }
 
