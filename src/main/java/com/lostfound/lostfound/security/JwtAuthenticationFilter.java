@@ -32,9 +32,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
  @SuppressWarnings("null")
 
-
- 
-
 @Override
 protected void doFilterInternal(
         HttpServletRequest request,
@@ -43,6 +40,7 @@ protected void doFilterInternal(
         throws ServletException, IOException {
 
  String path = request.getServletPath();
+     logger.info("PATH: {}", request.getServletPath());
 
 if (path.startsWith("/api/auth")) {
     filterChain.doFilter(request, response);
@@ -58,6 +56,8 @@ if (path.startsWith("/api/auth")) {
         filterChain.doFilter(request, response);
         return;
     }
+
+    try{
 
     String jwt = authHeader.substring(7).trim();
 
@@ -85,7 +85,12 @@ if (path.startsWith("/api/auth")) {
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
     }
-    logger.info("PATH: {}", request.getServletPath());
+} catch (Exception e) {
+    logger.error("JWT ERROR: {}", e.getMessage());
+    // ❗ Do NOT block request, just continue
+
+ }     
+
 
     filterChain.doFilter(request, response);
 }

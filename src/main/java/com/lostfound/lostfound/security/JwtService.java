@@ -20,11 +20,13 @@ public class JwtService {
     private static final String SECRET_KEY =
             "myverysecuresecretkeymyverysecuresecretkey";
 
-    private Key getSignInKey() {
-        byte[] keyBytes = SECRET_KEY.getBytes();
-        return Keys.hmacShaKeyFor(keyBytes);
-        
-    }
+   
+
+private Key getSignInKey() {
+    byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+    return Keys.hmacShaKeyFor(keyBytes);
+}
+
 
     public String generateToken(User user) {
       return Jwts.builder()
