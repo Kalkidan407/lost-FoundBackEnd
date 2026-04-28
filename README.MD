@@ -125,17 +125,18 @@
 ##  Security
 
 ```   
+ Role-based AuthZ,  
  Passwords encrypted using BCrypt
  Stateless authentication using JWT
  All protected routes require valid token
  Swagger configured with Bearer Authentication
+ 
 ```
 
 ## Future Improvements
  ```
  Email verification
  Password reset
- Role-based ADMIN dashboard
  Image upload support (Cloud storage)
  Pagination & filtering
  Unit & integration tests
