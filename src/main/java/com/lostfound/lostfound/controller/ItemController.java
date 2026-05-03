@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+ import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.lostfound.lostfound.dto.item.ItemRequest;
 import com.lostfound.lostfound.dto.item.ItemResponse;
@@ -30,7 +32,7 @@ public class ItemController{
   
     @GetMapping
        @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ItemResponse>> getAllItems() {
+    public Page<List<ItemResponse>> getAllItems() {
         return ResponseEntity.ok(itemService.getAllItems());
         
     }
