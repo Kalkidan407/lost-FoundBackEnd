@@ -32,8 +32,8 @@ public class ItemController{
   
     @GetMapping
        @ResponseStatus(HttpStatus.OK)
-    public Page<List<ItemResponse>> getAllItems() {
-        return ResponseEntity.ok(itemService.getAllItems());
+    public Page<ItemResponse> getAllItems(Pageable pageable ) {
+        return itemService.getAllItems(pageable);
         
     }
 
