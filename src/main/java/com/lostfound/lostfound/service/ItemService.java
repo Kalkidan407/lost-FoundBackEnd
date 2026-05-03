@@ -111,7 +111,7 @@ private ItemResponse toDTO(Item item) {
     public Page<ItemResponse> getAllItems(Pageable pageable) {
         return itemRepository.findAll(pageable)
                 .map( item -> new ItemResponse(
-                    item.getIdd(),
+                    item.getId(),
                     item.getName()
                 ));
     }
