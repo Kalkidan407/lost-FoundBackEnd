@@ -17,8 +17,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-
-    private static final String SECRET_KEY =
+ private static final String SECRET_KEY =
     "bXl2ZXJ5c2VjdXJlc2VjcmV0a2V5bXl2ZXJ5c2VjdXJlc2VjcmV0a2V5MTIz";
 
 private Key getSignInKey() {
@@ -31,7 +30,7 @@ private Key getSignInKey() {
         .setSubject(user.getEmail())
         .claim("role", user.getRole().name()) 
         .setIssuedAt(new Date())
-        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
+        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
         .signWith(getSignInKey(), SignatureAlgorithm.HS256)
         .compact();
 }

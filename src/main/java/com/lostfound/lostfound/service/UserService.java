@@ -4,11 +4,13 @@ import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.dto.user.UserRequest;
@@ -74,7 +76,8 @@ private User fromDTO(UserRequest request) {
 
     public UserResponse getUsersById(Long id){
         User user = userRepository.findById(id)
-                     .orElseThrow(() -> new RuntimeException("User not found with id:" + id));
+                     .orElseThrow(() -> new ResponseStatusException( 
+                        HttpStatus.NOT_FOUND  ,"User not found with id:" + id));
         return toDTO(user);
     }
 
@@ -85,7 +88,7 @@ private User fromDTO(UserRequest request) {
   public UserResponse getUserByUsername(String username) {
     User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> 
-                          new UsernameNotFoundException("User not found")) ;
+                          new ResponseStatusException( HttpStatus.NOT_FOUND,"User not found")) ;
         return toDTO(user);
     }
 
@@ -112,8 +115,6 @@ private User fromDTO(UserRequest request) {
     }
 
  
-
-
 
 
     public UserResponse updateUser(Long id, UserRequest updatedUser) throws AccessDeniedException {

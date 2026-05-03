@@ -57,10 +57,7 @@ if (path.startsWith("/api/auth")) {
         return;
     }
 
-    
-
     String jwt = authHeader.substring(7).trim();
-
     String email = jwtService.extractUsername(jwt);
 
     logger.debug("Extracted Email: {}", email);
@@ -85,8 +82,6 @@ if (path.startsWith("/api/auth")) {
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
     }
-     
-
 
     filterChain.doFilter(request, response);
 }

@@ -2,7 +2,9 @@ package com.lostfound.lostfound.service;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.lostfound.lostfound.dto.category.CategoryRequest;
 import com.lostfound.lostfound.dto.category.CategoryResponse;
@@ -50,8 +52,6 @@ private Category fromDTO(CategoryRequest request){
 }
 
 
-
-
     public List<CategoryResponse> getAllCategories() {
        List<Category> category = categoryRepository.findAll();
     return category.stream().map( this:: toDTO).toList();
@@ -75,7 +75,7 @@ private Category fromDTO(CategoryRequest request){
 
  public CategoryResponse updateCategory(Long id, CategoryRequest updatedCategory) {
      Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category entity not found with id" + id));
+                .orElseThrow(() -> new ResponseStatusException( HttpStatus.NOT_FOUND,"Category entity not found with id" + id));
 
                 category.setName(updatedCategory.getName());
                 

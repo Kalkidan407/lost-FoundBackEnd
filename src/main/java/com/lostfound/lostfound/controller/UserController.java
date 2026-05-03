@@ -41,12 +41,7 @@ private final UserService userService;
   }
 
 
-@GetMapping
-@ResponseStatus(HttpStatus.OK)
-//@PreAuthorize("hasRole('ADMIN')")
-   public List<UserResponse> getAllUsers() {
-       return userService.getAllUser();
-   }
+
 
 @GetMapping("/id/{id}")
 @ResponseStatus(HttpStatus.OK)
@@ -78,3 +73,9 @@ private final UserService userService;
    
     
 }
+
+
+
+
+
+
