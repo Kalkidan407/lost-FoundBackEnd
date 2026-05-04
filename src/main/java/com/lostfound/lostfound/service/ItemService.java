@@ -1,10 +1,7 @@
 package com.lostfound.lostfound.service;
 
 import java.nio.file.AccessDeniedException;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,8 +32,6 @@ public class ItemService {
     private final CategoryRepository categoryRepo;
     private final LocationRepository locationRepo;
 
-//     Pageable pageable = PageRequest.of(page, size);
-// return itemRepository.findAll(pageable).map(this::mapToResponse);
 
     private User getCurrentUser() {
       
@@ -48,13 +43,12 @@ public class ItemService {
     }
 
 
-    // --------------------------
-    // Convert Entity -> Response DTO, /get/
-    // --------------------------
 
 private ItemResponse toDTO(Item item) {
     ItemResponse dto = new ItemResponse();
   
+    dto.setId(item.getId());
+
     dto.setName(item.getName());
     dto.setDescription(item.getDescription());
     dto.setPhotoUrl(item.getPhotoUrl());
@@ -71,14 +65,11 @@ private ItemResponse toDTO(Item item) {
         dto.setLocationId(item.getLocation().getId());
         dto.setLocationName(item.getLocation().getName());
     }
-    // report mapping later (when implemented)
+   
     return dto;
 }
 
 
-    // --------------------------
-    // Convert Request DTO -> Entity (Create/update, Incoming Data → Backend)
-    // --------------------------
 
     private Item fromDTO(ItemRequest dto) {
 
@@ -107,13 +98,15 @@ private ItemResponse toDTO(Item item) {
 
     }
 
+//     public class ItemSummaryResponse {
+//     private Long id;
+//     private String name;
+// }
 
-    public Page<ItemResponse> getAllItems(Pageable pageable) {
+
+    public Page< ItemSummaryResponse> getAllItems(Pageable pageable) {
         return itemRepository.findAll(pageable)
-                .map( item -> new ItemResponse(
-                    item.getId(),
-                    item.getName()
-                ));
+                .map(this::toDTO);
     }
 
     public ItemResponse addItem(ItemRequest dto) {

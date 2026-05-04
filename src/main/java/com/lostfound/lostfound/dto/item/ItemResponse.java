@@ -25,6 +25,8 @@ public class ItemResponse {
 
     private Long reportId;
     private String reportedBy;
+
+    
 }
 
 
