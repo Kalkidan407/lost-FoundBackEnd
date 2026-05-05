@@ -104,10 +104,27 @@ private ItemResponse toDTO(Item item) {
 // }
 
 
+    // public Page<ItemResponse> getAllItems(Pageable pageable) {
+    //     return itemRepository.findAll(pageable)
+    //             .map(this::toDTO);
+    // }
+
     public Page<ItemResponse> getAllItems(Pageable pageable) {
-        return itemRepository.findAll(pageable)
-                .map(this::toDTO);
-    }
+
+    int maxSize = 20;
+    int pageSize = Math.min(pageable.getPageSize(), maxSize);
+
+    Pageable safePageable = PageRequest.of(
+            pageable.getPageNumber(),
+            pageSize,
+            pageable.getSort().isSorted()
+                    ? pageable.getSort()
+                    : Sort.by("id").descending()
+    );
+
+    return itemRepository.findAll(safePageable)
+            .map(this::toDTO);
+}
 
     public ItemResponse addItem(ItemRequest dto) {
       User currentUser = getCurrentUser();
