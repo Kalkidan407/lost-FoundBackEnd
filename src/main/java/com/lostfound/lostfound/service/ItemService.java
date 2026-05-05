@@ -111,10 +111,10 @@ private ItemResponse toDTO(Item item) {
     Pageable pageable = PageRequest.of(
             page,
             safeSize,
-            Sort.by("id").descending() // 👈 ALWAYS sort by id
+            Sort.by("id").descending() 
     );
 
-    if (keyword != null && !keyword.isEmpty()) {
+    if (keyword != null && !keyword.trim().isEmpty()) {
         return itemRepository
                 .findByNameContainingIgnoreCase(keyword, pageable)
                 .map(this::toDTO);
