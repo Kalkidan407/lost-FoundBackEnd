@@ -102,42 +102,25 @@ private ItemResponse toDTO(Item item) {
 
     }
 
-//     public class ItemSummaryResponse {
-//     private Long id;
-//     private String name;
-// }
 
-
-    // public Page<ItemResponse> getAllItems(Pageable pageable) {
-    //     return itemRepository.findAll(pageable)
-    //             .map(this::toDTO);
-    // }
-
-    public Page<ItemResponse> getAllItems(
-         String keyword,
-        Long categoryId,
-        Long locationId,
-        Pageable pageable
-    ) {
+   public Page<ItemResponse> getAllItems(String keyword, int page, int size) {
 
     int maxSize = 20;
-    int pageSize = Math.min(pageable.getPageSize(), maxSize);
+    int safeSize = Math.min(size, maxSize);
 
-    Pageable safePageable = PageRequest.of(
-            pageable.getPageNumber(),
-            pageSize,
-            pageable.getSort().isSorted()
-                    ? pageable.getSort()
-                    : Sort.by("id").descending()
+    Pageable pageable = PageRequest.of(
+            page,
+            safeSize,
+            Sort.by("id").descending() // 👈 ALWAYS sort by id
     );
 
-     if (keyword != null && !keyword.isEmpty()) {
+    if (keyword != null && !keyword.isEmpty()) {
         return itemRepository
-                .findByNameContainingIgnoreCase(keyword, safePageable)
+                .findByNameContainingIgnoreCase(keyword, pageable)
                 .map(this::toDTO);
     }
 
-    return itemRepository.findAll(safePageable)
+    return itemRepository.findAll(pageable)
             .map(this::toDTO);
 }
 

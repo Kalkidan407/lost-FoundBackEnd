@@ -30,25 +30,19 @@ public class ItemController{
     }
 
   
-    // @GetMapping
-     
-    // public Page<ItemResponse> getAllItems(Pageable pageable ) {
-    //     return itemService.getAllItems(pageable);
-        
-    // }
+   
 
     @GetMapping
 public Page<ItemResponse> getAllItems(
         @RequestParam(required = false) String keyword,
-        @RequestParam(required = false) Long categoryId,
-        @RequestParam(required = false) Long locationId,
-        Pageable pageable
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size
+        
 ) {
     return itemService.getAllItems(
             keyword,
-            categoryId,
-            locationId,
-            pageable
+            page,
+            size
     );
 }
 
