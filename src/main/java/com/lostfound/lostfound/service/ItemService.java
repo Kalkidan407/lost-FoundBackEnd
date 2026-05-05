@@ -104,7 +104,7 @@ private ItemResponse toDTO(Item item) {
 // }
 
 
-    public Page< ItemSummaryResponse> getAllItems(Pageable pageable) {
+    public Page<ItemResponse> getAllItems(Pageable pageable) {
         return itemRepository.findAll(pageable)
                 .map(this::toDTO);
     }
