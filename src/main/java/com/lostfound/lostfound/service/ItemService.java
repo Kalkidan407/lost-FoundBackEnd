@@ -107,6 +107,8 @@ private ItemResponse toDTO(Item item) {
 
     int maxSize = 20;
     int safeSize = Math.min(size, maxSize);
+    Page<Item> items;
+
 
     Pageable pageable = PageRequest.of(
             page,
@@ -115,14 +117,14 @@ private ItemResponse toDTO(Item item) {
     );
 
     if (keyword != null && !keyword.trim().isEmpty()) {
-        return itemRepository
-                .findByNameContainingIgnoreCase(keyword, pageable)
-                .map(this::toDTO);
+        items = itemRepository.findByNameContainingIgnoreCase(keyword, pageable);
+    } else {
+        items = itemRepository.findAll(pageable);
     }
 
-    return itemRepository.findAll(pageable)
-            .map(this::toDTO);
+    return  items.map(this::toDTO);
 }
+
 
     public ItemResponse addItem(ItemRequest dto) {
       User currentUser = getCurrentUser();
