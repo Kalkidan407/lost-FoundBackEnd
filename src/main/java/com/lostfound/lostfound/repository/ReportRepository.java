@@ -10,7 +10,10 @@ import com.lostfound.lostfound.model.Report;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
-       Page<Report> findAll(Pageable pageable);
-    Page<Report> findByReportType(String keyword. Pageable pageable)
+    
+    Page<Report> findByMessageContainingIgnoreCase(
+        String keyword,
+         Pageable pageable
+        );
     
 }

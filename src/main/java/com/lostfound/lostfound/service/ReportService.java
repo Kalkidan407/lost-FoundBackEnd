@@ -5,6 +5,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+
 import com.lostfound.lostfound.dto.report.ReportRequest;
 import com.lostfound.lostfound.dto.report.ReportResponse;
 import com.lostfound.lostfound.dto.user.UserResponse;
@@ -27,9 +32,11 @@ public class ReportService {
   private final LocationRepository locationRepository;
   private final ItemRepository itemRepository;
 
-  private ReportResponse toDo(Report report) {
+  private ReportResponse toDTO(Report report) {
     ReportResponse dto = new ReportResponse();
+
     dto.setId(report.getId());
+
     dto.setMessage(report.getMessage());
 
    if(report.getUser() != null){
@@ -38,7 +45,8 @@ public class ReportService {
     u.setName(report.getUser().getUsername());
     u.setEmail(report.getUser().getEmail());
     dto.setReportedBy(u);
-   }
+   
+  }
 
 
     return dto;
@@ -69,7 +77,7 @@ public class ReportService {
     // --------------------------
 
 
-  public List<ReportResponse> getAllReports(String keyword, int page, int size) {
+  public Page<ReportResponse> getAllReports(String keyword, int page, int size) {
      int maxSize = 12;
      int safeSize = Math.min(size, maxSize);
 
@@ -80,22 +88,22 @@ public class ReportService {
 
      );
 
-if(keyword != null && !keyword.trim().isEmpty()){
-  reports =  reportRepository.findByReportType(keyword, pageable);
+if( keyword != null && !keyword.trim().isEmpty()){
+  reports =  reportRepository.findByMessageContainingIgnoreCase(keyword, pageable);
 
 } else{
   reports = reportRepository.findAll(pageable);
 }
 
-    return reports
-            .map(this::toDo);
+    return reports.map(this::toDTO);
+
   }
 
 
   public ReportResponse addReport(ReportRequest dto){
     Report report =fromDTO(dto);
     Report savedReport = reportRepository.save(report);
-    return toDo(savedReport);
+    return toDTO(savedReport);
   }
 
 
@@ -125,12 +133,12 @@ if(keyword != null && !keyword.trim().isEmpty()){
     Report saved = reportRepository.save(report);
 
  
-    return toDo(saved);
+    return toDTO(saved);
 }
 
 public ReportResponse getReportById(Long id) {
     return reportRepository.findById(id)
-            .map(this::toDo)
+            .map(this::toDTO)
             .orElseThrow(() -> new RuntimeException("Report not found"));
 }
 
