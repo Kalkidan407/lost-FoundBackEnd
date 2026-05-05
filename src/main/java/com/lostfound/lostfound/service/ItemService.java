@@ -131,6 +131,12 @@ private ItemResponse toDTO(Item item) {
                     : Sort.by("id").descending()
     );
 
+     if (keyword != null && !keyword.isEmpty()) {
+        return itemRepository
+                .findByNameContainingIgnoreCase(keyword, safePageable)
+                .map(this::toDTO);
+    }
+
     return itemRepository.findAll(safePageable)
             .map(this::toDTO);
 }

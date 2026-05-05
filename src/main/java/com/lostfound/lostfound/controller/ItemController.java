@@ -40,19 +40,21 @@ public class ItemController{
     @GetMapping
 public Page<ItemResponse> getAllItems(
         @RequestParam(required = false) String keyword,
-     
         @RequestParam(required = false) Long categoryId,
         @RequestParam(required = false) Long locationId,
         Pageable pageable
 ) {
     return itemService.getAllItems(
             keyword,
-        
             categoryId,
             locationId,
             pageable
     );
 }
+
+
+
+
 
     @GetMapping("/{id}")
        @ResponseStatus(HttpStatus.OK)

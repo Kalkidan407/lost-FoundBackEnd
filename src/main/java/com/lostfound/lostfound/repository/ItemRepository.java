@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     Page<Item> findAll(Pageable pageable);
+    Page<Item> findByNameContainingIgnoreCase(String keyword, Pageable pageable);
    
 }
 
