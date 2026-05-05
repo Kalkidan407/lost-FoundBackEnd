@@ -69,11 +69,26 @@ public class ReportService {
     // --------------------------
 
 
-  public List<ReportResponse> getAllReports(){
-    return reportRepository.findAll()
-            .stream()
-            .map(this::toDo)
-            .collect(Collectors.toList());
+  public List<ReportResponse> getAllReports(String keyword, int page, int size) {
+     int maxSize = 12;
+     int safeSize = Math.min(size, maxSize);
+
+     Page<Report> reports;
+
+     Pageable pageable = PageRequest.of(
+       page, safeSize, Sort.by("id").descending()
+
+     );
+
+if(keyword != null && !keyword.trim().isEmpty()){
+  reports =  reportRepository.findByReportType(keyword, pageable);
+
+} else{
+  reports = reportRepository.findAll(pageable);
+}
+
+    return reports
+            .map(this::toDo);
   }
 
 

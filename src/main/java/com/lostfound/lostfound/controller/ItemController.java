@@ -29,8 +29,6 @@ public class ItemController{
         return ResponseEntity.ok(created);
     }
 
-  
-   
 
     @GetMapping
 public Page<ItemResponse> getAllItems(
@@ -45,8 +43,6 @@ public Page<ItemResponse> getAllItems(
             size
     );
 }
-
-
 
     @GetMapping("/{id}")
        @ResponseStatus(HttpStatus.OK)

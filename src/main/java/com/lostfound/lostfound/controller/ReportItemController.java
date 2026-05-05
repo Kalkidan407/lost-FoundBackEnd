@@ -34,9 +34,16 @@ public class ReportItemController  {
     }
 
     @GetMapping
-     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ReportResponse>> getAllReports(){
-        return  ResponseEntity.ok(reportService.getAllReports());
+    public Page<ReportResponse> getAllReports(
+       @RequestParam(required = false) String keyword,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size
+    ){
+        return  reportService.getAllReports(
+          keyword,
+          page,
+          size
+        );
     }
 
     @DeleteMapping("/delete/{id}")
