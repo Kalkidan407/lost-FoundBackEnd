@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import com.lostfound.lostfound.dto.item.ItemRequest;
 import com.lostfound.lostfound.dto.item.ItemResponse;
@@ -21,6 +23,8 @@ import com.lostfound.lostfound.repository.CategoryRepository;
 import com.lostfound.lostfound.repository.LocationRepository;
 import com.lostfound.lostfound.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+
+
 
 
 @Service
@@ -109,7 +113,12 @@ private ItemResponse toDTO(Item item) {
     //             .map(this::toDTO);
     // }
 
-    public Page<ItemResponse> getAllItems(Pageable pageable) {
+    public Page<ItemResponse> getAllItems(
+         String keyword,
+        Long categoryId,
+        Long locationId,
+        Pageable pageable
+    ) {
 
     int maxSize = 20;
     int pageSize = Math.min(pageable.getPageSize(), maxSize);
