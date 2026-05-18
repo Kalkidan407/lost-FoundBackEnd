@@ -127,7 +127,7 @@
 ```   
  Role-based AuthZ
  Passwords encrypted using BCrypt
-  Pagination & filtering
+ Pagination & filtering
  Stateless authentication using JWT
  All protected routes require valid token
  Swagger configured with Bearer Authentication

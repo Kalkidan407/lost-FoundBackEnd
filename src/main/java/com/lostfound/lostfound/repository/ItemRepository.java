@@ -15,6 +15,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ItemRepository extends JpaRepository<Item, Long> {
  
     Page<Item> findByNameContainingIgnoreCase(String keyword, Pageable pageable);
+
+    Page<Item> findByDeletedAtIsNullAndNameContainingIgnoreCase(
+    String keyword,
+    Pageable pageable
+);
+
+Page<Item> findByDeletedAtIsNull(Pageable pageable);
    
 }
 

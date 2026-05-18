@@ -118,12 +118,17 @@ private ItemResponse toDTO(Item item) {
     );
 
     if (keyword != null && !keyword.trim().isEmpty()) {
-        items = itemRepository.findByNameContainingIgnoreCase(keyword, pageable);
-    } else {
-        items = itemRepository.findAll(pageable);
-    }
+        items = itemRepository.findByDeletedAtIsNullAndNameContainingIgnoreCase(keyword, pageable);
+                              
+    }  else {
+            items = itemRepository.findByDeletedAtIsNull(pageable);
+                                
+        }
+
+
 
     return  items.map(this::toDTO);
+
 }
 
 
@@ -144,24 +149,25 @@ private ItemResponse toDTO(Item item) {
 
   
 
-    public void deleteItemById(Long id){
+    public void deleteItemById(Long id) {
 
     Item item = itemRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Item not found"));
 
     User currentUser = getCurrentUser();
 
-    // boolean isAdmin = currentUser.getRole().name().equals("ADMIN");
+    boolean isAdmin = currentUser.getRole().name().equals("ADMIN");
 
-    // boolean isOwner = item.getUser().getId().equals(currentUser.getId());
+    boolean isOwner = item.getUser().getId().equals(currentUser.getId());
 
-    // if(!isAdmin && !isOwner){
-    //     throw new RuntimeException("You are not allowed to delete this item");
-    // }
+    if(!isAdmin && !isOwner){
+        throw new RuntimeException("You are not allowed to delete this item");
+    }
 
-    itemRepository.delete(item);
+    item.setDeletedAt(LocalDateTime.now());
+
+    itemRepository.save(item);
 }
-
 
  
     public void deleteAllItems(){
@@ -188,5 +194,6 @@ Item item = itemRepository.findById(id)
 
         return toDTO(updated);
 }
+
 
 }

@@ -36,6 +36,8 @@ public class Item {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+  private LocalDateTime deletedAt;  
+
  @ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name = "user_id")
 private User user;
