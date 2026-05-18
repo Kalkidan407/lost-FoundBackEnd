@@ -1,6 +1,7 @@
 package com.lostfound.lostfound.service;
 
 import java.nio.file.AccessDeniedException;
+import java.time.LocalDateTime;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -156,13 +157,13 @@ private ItemResponse toDTO(Item item) {
 
     User currentUser = getCurrentUser();
 
-    // boolean isAdmin = currentUser.getRole().name().equals("ADMIN");
+    boolean isAdmin = currentUser.getRole().name().equals("ADMIN");
 
-    // boolean isOwner = item.getUser().getId().equals(currentUser.getId());
+    boolean isOwner = item.getUser().getId().equals(currentUser.getId());
 
-    // if(!isAdmin && !isOwner){
-    //     throw new RuntimeException("You are not allowed to delete this item");
-    // }
+    if(!isAdmin && !isOwner){
+        throw new RuntimeException("You are not allowed to delete this item");
+    }
 
     item.setDeletedAt(LocalDateTime.now());
 
