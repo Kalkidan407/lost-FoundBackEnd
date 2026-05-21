@@ -1,32 +1,28 @@
 package com.lostfound.lostfound.service;
 
-import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-
 import com.lostfound.lostfound.dto.item.ItemRequest;
 import com.lostfound.lostfound.dto.item.ItemResponse;
+import com.lostfound.lostfound.model.Category;
 import com.lostfound.lostfound.model.Item;
-import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.model.Location;
 import com.lostfound.lostfound.model.Status;
-import com.lostfound.lostfound.model.Category;
-import com.lostfound.lostfound.repository.UserRepository;
+import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.repository.CategoryRepository;
-import com.lostfound.lostfound.repository.LocationRepository;
 import com.lostfound.lostfound.repository.ItemRepository;
+import com.lostfound.lostfound.repository.LocationRepository;
+import com.lostfound.lostfound.repository.UserRepository;
+
 import lombok.RequiredArgsConstructor;
-
-
 
 
 @Service
@@ -38,7 +34,6 @@ public class ItemService {
     private final CategoryRepository categoryRepo;
     private final LocationRepository locationRepo;
 
-
     private User getCurrentUser() {
       
     Authentication auth = (Authentication) SecurityContextHolder.getContext().getAuthentication();
@@ -48,9 +43,8 @@ public class ItemService {
             .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-
-
 private ItemResponse toDTO(Item item) {
+
     ItemResponse dto = new ItemResponse();
   
     dto.setId(item.getId());
@@ -74,7 +68,6 @@ private ItemResponse toDTO(Item item) {
    
     return dto;
 }
-
 
 
     private Item fromDTO(ItemRequest dto) {
@@ -105,12 +98,12 @@ private ItemResponse toDTO(Item item) {
     }
 
 
-   public Page<ItemResponse> getAllItems(String keyword, int page, int size) {
+   public Page<ItemResponse> getAllItems( String keyword, int page, int size ) {
 
     int maxSize = 20;
     int safeSize = Math.min(size, maxSize);
-    Page<Item> items;
 
+    Page<Item> items;
 
     Pageable pageable = PageRequest.of(
             page,
@@ -125,8 +118,6 @@ private ItemResponse toDTO(Item item) {
             items = itemRepository.findByDeletedAtIsNull(pageable);
                                 
         }
-
-
 
     return  items.map(this::toDTO);
 
@@ -152,6 +143,8 @@ private ItemResponse toDTO(Item item) {
 
     public void deleteItemById(Long id) {
 
+  
+
     Item item = itemRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Item not found"));
 
@@ -165,6 +158,7 @@ private ItemResponse toDTO(Item item) {
         throw new RuntimeException("You are not allowed to delete this item");
     }
 
+    item.setDeleted(true);
     item.setDeletedAt(LocalDateTime.now());
 
     itemRepository.save(item);
