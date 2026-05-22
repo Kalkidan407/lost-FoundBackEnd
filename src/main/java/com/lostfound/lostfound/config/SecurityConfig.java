@@ -15,8 +15,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.lostfound.lostfound.security.JwtAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
+
 @Configuration
 @RequiredArgsConstructor
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
@@ -45,7 +47,7 @@ public class SecurityConfig {
               .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class); 
             
            
-            ;
+            
 
             return http.build();
      }

@@ -65,10 +65,19 @@ private Category fromDTO(CategoryRequest request){
     }
     
     public void deleteCategoryById(Long id){
-      categoryRepository.deleteById(id);
+      Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found with id: " + id));
+      category.setDeleted(true);
+      category.setDeletedAt(java.time.LocalDateTime.now());
+      categoryRepository.save(category);
     }
+
     public void deleteAllCategories(){
-      categoryRepository.deleteAll();
+      categoryRepository.findAll().forEach(category -> {
+        category.setDeleted(true);
+        category.setDeletedAt(java.time.LocalDateTime.now());
+        categoryRepository.save(category);
+      });
     }
 
     

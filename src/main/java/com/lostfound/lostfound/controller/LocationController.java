@@ -19,7 +19,7 @@ import com.lostfound.lostfound.dto.location.LocationRequest;
 import com.lostfound.lostfound.dto.location.LocationResponse;
 import com.lostfound.lostfound.service.LocationService;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,41 +30,45 @@ public class LocationController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public LocationResponse createCategLocation(@RequestBody LocationRequest request){
         return locationService.addLocation(request);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("isAuthenticated()")
     public List<LocationResponse> getAllLocations() {
         return locationService.getAllLocations();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("isAuthenticated()")
     public LocationResponse getLocationById(@PathVariable Long id){
         return locationService.getLocationById(id);
                
     }
 
     @DeleteMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteLocationById(@PathVariable Long id){
         locationService.deleteLocationById(id);
-        return ResponseEntity.ok("Location deleted successfully with id" + id);
+        return ResponseEntity.ok("Location deleted successfully with id: " + id);
     }
 
     @DeleteMapping("/deleteAll")
-    //@PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteAllLocations(){
         locationService.deleteAllLocations();
-        return ResponseEntity.ok("All locations deleted ");
+        return ResponseEntity.ok("All locations deleted");
     }
 
     @PutMapping("/update/{id}")  
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN')")
     public LocationResponse updateLocation(@PathVariable Long id, @RequestBody LocationRequest request){
         return locationService.updateLocation(id, request);
     }

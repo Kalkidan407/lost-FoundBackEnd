@@ -36,29 +36,31 @@ private final UserService userService;
 
 @PostMapping("/create")
 @ResponseStatus(HttpStatus.CREATED)
-  public UserResponse createUser(@Valid @RequestBody UserRequest user) {
-    return userService.createUser(user);
-  }
+@PreAuthorize("permitAll()")
+public UserResponse createUser(@Valid @RequestBody UserRequest user) {
+  return userService.createUser(user);
+}
 
 
 
 
 @GetMapping("/id/{id}")
 @ResponseStatus(HttpStatus.OK)
-    public UserResponse getUserById(@PathVariable Long id) {
-        return userService.getUsersById(id);
-               
-    }
+@PreAuthorize("isAuthenticated()")
+public UserResponse getUserById(@PathVariable Long id) {
+    return userService.getUsersById(id);
+}
 
 @GetMapping("/username/{name}")
 @ResponseStatus(HttpStatus.OK)
-    public UserResponse getUserByUsername(@PathVariable String name) {
-        return userService.getUserByUsername(name);
-  }
+@PreAuthorize("isAuthenticated()")
+public UserResponse getUserByUsername(@PathVariable String name) {
+    return userService.getUserByUsername(name);
+}
 
   @DeleteMapping("/delete/{id}")
-  //@PreAuthorize("hasRole('ADMIN')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
+  @PreAuthorize("hasRole('ADMIN')")
   public void deleteUserById(@PathVariable Long id){
     userService.deleteUserById(id);
   }
@@ -66,10 +68,10 @@ private final UserService userService;
     
      @PutMapping("/update/{id}")
      @ResponseStatus(HttpStatus.OK)
-    // @PreAuthorize("hasRole('ADMIN')")
-    public UserResponse updateCategory(@PathVariable Long id, @RequestBody UserRequest updatedUser) throws AccessDeniedException {
-      return userService.updateUser(id, updatedUser);
-    }
+     @PreAuthorize("isAuthenticated()")
+     public UserResponse updateCategory(@PathVariable Long id, @RequestBody UserRequest updatedUser) throws AccessDeniedException {
+       return userService.updateUser(id, updatedUser);
+     }
    
     
 }

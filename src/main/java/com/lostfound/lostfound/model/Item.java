@@ -3,6 +3,10 @@ package com.lostfound.lostfound.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.SQLRestriction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +26,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "item")
+@Table( name ="item")
+@SQLRestriction("is_deleted = false")
 public class Item {
 
    @Id

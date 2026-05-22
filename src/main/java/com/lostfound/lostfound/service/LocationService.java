@@ -77,10 +77,19 @@ location.setLongitude(request.getLongitude());
     }
 
     public void deleteLocationById(Long id){
-        locationRepository.deleteById(id);
+        Location location = locationRepository.findById(id)
+                            .orElseThrow(() -> new RuntimeException("Location not found with id: " + id));
+        location.setDeleted(true);
+        location.setDeletedAt(java.time.LocalDateTime.now());
+        locationRepository.save(location);
     }
+
     public void deleteAllLocations(){
-        locationRepository.deleteAll();
+        locationRepository.findAll().forEach(location -> {
+            location.setDeleted(true);
+            location.setDeletedAt(java.time.LocalDateTime.now());
+            locationRepository.save(location);
+        });
     }
 
 

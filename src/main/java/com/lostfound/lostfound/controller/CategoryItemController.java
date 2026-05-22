@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,37 +30,40 @@ public class CategoryItemController {
     public final CategoryService categoryService;
 
     @PostMapping("/create")
-     @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public CategoryResponse createCategory(  @RequestBody CategoryRequest category){
         return categoryService.addCategory(category);
     }
     
     @GetMapping
-     @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("isAuthenticated()")
     public List<CategoryResponse> getAllCategories() {
         return categoryService.getAllCategories();
     }
     
-     
+      
     @DeleteMapping("/delete/{id}")
-     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteCategoryById(@PathVariable Long id){
       categoryService.deleteCategoryById(id);
-      return ResponseEntity.ok("Category deleted successfully with id" + id);
+      return ResponseEntity.ok("Category deleted successfully with id: " + id);
     }
     
   @DeleteMapping("/deleteAll")
-  //@PreAuthorize("hasRole('USER')")
-   @ResponseStatus(HttpStatus.NO_CONTENT)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<String> deleteAllCategories(){
     categoryService.deleteAllCategories();
     return ResponseEntity.ok("All categories deleted");
-
   }
 
 
     @PutMapping("/update/{id}")
-     @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN')")
     public CategoryResponse updateCategory(@PathVariable Long id, @RequestBody CategoryRequest updatedCategory){
       return categoryService.updateCategory(id, updatedCategory);
     }

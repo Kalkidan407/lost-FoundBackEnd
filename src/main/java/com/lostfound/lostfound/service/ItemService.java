@@ -143,9 +143,7 @@ private ItemResponse toDTO(Item item) {
 
     public void deleteItemById(Long id) {
 
-  
-
-    Item item = itemRepository.findById(id)
+    Item item = itemRepository.findByIdAndDeletedAtIsNull(id)
             .orElseThrow(() -> new RuntimeException("Item not found"));
 
     User currentUser = getCurrentUser();
@@ -156,6 +154,7 @@ private ItemResponse toDTO(Item item) {
 
     if(!isAdmin && !isOwner){
         throw new RuntimeException("You are not allowed to delete this item");
+    
     }
 
     item.setDeleted(true);
@@ -166,7 +165,11 @@ private ItemResponse toDTO(Item item) {
 
  
     public void deleteAllItems(){
-        itemRepository.deleteAll();
+        itemRepository.findAll().forEach(item -> {
+            item.setDeleted(true);
+            item.setDeletedAt(LocalDateTime.now());
+            itemRepository.save(item);
+        });
     }
 
 public ItemResponse updateItem(Long id, ItemRequest dto){

@@ -1,6 +1,9 @@
 package com.lostfound.lostfound.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import org.hibernate.annotations.SQLRestriction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,6 +22,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name ="categories")
+@SQLRestriction("is_deleted = false")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +31,13 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(name = "is_deleted")
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Item> items;
 
-    
-    
 }

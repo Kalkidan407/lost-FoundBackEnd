@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.SQLRestriction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "report")
+@SQLRestriction("is_deleted = false")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Report {
@@ -32,21 +34,25 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-@ManyToOne(fetch = FetchType.LAZY)
-@JoinColumn(name = "user_id")
-@OnDelete(action = OnDeleteAction.SET_NULL)
-private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    private User user;
 
-@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
-@Column(nullable = false, length = 2000)
-private String message;
+    @Column(nullable = false, length = 2000)
+    private String message;
 
- private String reportType; // "FOUND" or "CLAIM" or "LOST"
+    private String reportType; // "FOUND" or "CLAIM" or "LOST"
 
-private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    
+    @Column(name = "is_deleted")
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
+
 }

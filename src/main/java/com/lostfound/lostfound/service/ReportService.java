@@ -144,11 +144,19 @@ public ReportResponse getReportById(Long id) {
 
  
   public void deleteAllReport(){
-    reportRepository.deleteAll();
+    reportRepository.findAll().forEach(report -> {
+      report.setDeleted(true);
+      report.setDeletedAt(java.time.LocalDateTime.now());
+      reportRepository.save(report);
+    });
   }
 
   public void deleteReportById(Long id){
-    reportRepository.deleteById(id);
+    Report report = reportRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Report not found with id: " + id));
+    report.setDeleted(true);
+    report.setDeletedAt(java.time.LocalDateTime.now());
+    reportRepository.save(report);
   }
     
     

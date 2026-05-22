@@ -107,11 +107,19 @@ private User fromDTO(UserRequest request) {
 
 
     public void deleteUserById(Long id){
-        userRepository.deleteById(id);
+      User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id));
+      user.setDeleted(true);
+      user.setDeletedAt(java.time.LocalDateTime.now());
+      userRepository.save(user);
     }
     
     public void deleteAllUsers(){
-        userRepository.deleteAll();
+      userRepository.findAll().forEach(user -> {
+        user.setDeleted(true);
+        user.setDeletedAt(java.time.LocalDateTime.now());
+        userRepository.save(user);
+      });
     }
 
  
