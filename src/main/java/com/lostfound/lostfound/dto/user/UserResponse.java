@@ -2,6 +2,7 @@ package com.lostfound.lostfound.dto.user;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.dto.report.ReportResponse;
 import com.lostfound.lostfound.model.Role;
@@ -22,7 +23,9 @@ public class UserResponse {
     private String name;
     private Role role;
     private String email;
+    @JsonIgnore
     private List<ReportResponse> report;
+    @JsonIgnore
     private List<ItemResponse> items;
     
 }

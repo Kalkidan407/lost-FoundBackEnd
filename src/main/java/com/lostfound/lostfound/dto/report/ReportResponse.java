@@ -1,5 +1,6 @@
 package com.lostfound.lostfound.dto.report;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.dto.user.UserResponse;
 
@@ -16,5 +17,6 @@ public class ReportResponse {
 
     private String  message;
     private ItemResponse reportedItem;
+    @JsonIgnore
     private UserResponse reportedBy;
 }
