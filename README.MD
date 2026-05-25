@@ -126,8 +126,7 @@
 
 ```   
  Role-based AuthZ
- Passwords encrypted using BCrypt
- Pagination & filtering
+ Passwords encrypted using BCrypts
  Stateless authentication using JWT
  All protected routes require valid token
  Swagger configured with Bearer Authentication
@@ -138,8 +137,7 @@
  ```
  Email verification
  Password reset
- Image upload support (Cloud storage)
- Unit & integration tests
+
 ```
 
 ##  Author
