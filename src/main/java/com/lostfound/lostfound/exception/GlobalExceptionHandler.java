@@ -82,7 +82,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleGenericException(
             Exception ex,
             HttpServletRequest request) {
-                
+
                 ex.printStackTrace();
         
         ErrorResponse errorResponse = ErrorResponse.builder()
