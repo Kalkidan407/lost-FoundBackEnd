@@ -39,14 +39,6 @@ public class ReportService {
 
     dto.setMessage(report.getMessage());
 
-   if(report.getUser() != null){
-    UserResponse u = new UserResponse();
-    u.setId(report.getUser().getId());
-    u.setName(report.getUser().getUsername());
-    u.setEmail(report.getUser().getEmail());
-    dto.setReportedBy(u);
-   
-  }
 
 
     return dto;
@@ -59,7 +51,7 @@ public class ReportService {
       report.setReportType(dto.getReportType());
       
   
-   User user = userRepository.findById(dto.getReportedById())
+   User user = userRepository.findById(dto.getReportedBy())
             .orElseThrow(() -> new RuntimeException("User not found"));
     report.setUser(user);
 
@@ -120,8 +112,8 @@ if( keyword != null && !keyword.trim().isEmpty()){
         report.setItem(item);
     }
 
-    if (dto.getReportedById() != null) {
-        User user = userRepository.findById(dto.getReportedById())
+    if (dto.getReportedBy() != null) {
+        User user = userRepository.findById(dto.getReportedBy())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         report.setUser(user);
     }
