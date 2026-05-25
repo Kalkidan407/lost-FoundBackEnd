@@ -62,11 +62,11 @@ private User user;
     @Column(nullable = false,  length = 2000)
     private String description;
 
-     @Column(nullable = false, unique = true)
+     @Column(nullable = false)
     private String photoUrl;
 
      @Enumerated(EnumType.STRING) 
-     @Column(nullable = false, unique = true)
+     @Column(nullable = false)
     private Status status;
 
   

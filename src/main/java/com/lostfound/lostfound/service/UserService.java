@@ -2,8 +2,6 @@ package com.lostfound.lostfound.service;
 
 import java.nio.file.AccessDeniedException;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
