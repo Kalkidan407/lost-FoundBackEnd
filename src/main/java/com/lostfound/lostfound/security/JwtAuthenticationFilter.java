@@ -42,7 +42,10 @@ protected void doFilterInternal(
  String path = request.getServletPath();
      logger.info("PATH: {}", request.getServletPath());
 
-if (path.startsWith("/api/auth")) {
+if (path.startsWith("/api/auth") || 
+    path.startsWith("/swagger-ui") || 
+    path.startsWith("/v3/api-docs") ||
+    path.equals("/swagger-ui.html")) {
     filterChain.doFilter(request, response);
     return;
 }
