@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springdoc.core.models.GroupedOpenApi;
+
 
 @Configuration
 @OpenAPIDefinition(
@@ -25,13 +25,3 @@ import org.springdoc.core.models.GroupedOpenApi;
         in = SecuritySchemeIn.HEADER
 )
 
-public class OpenApiConfig {
-    
-    @Bean
-    public GroupedOpenApi publicApi() {
-        return GroupedOpenApi.builder()
-                .group("Public API")
-                .packagesToScan("com.lostfound.lostfound.controller")
-                .build();
-    }
-}
