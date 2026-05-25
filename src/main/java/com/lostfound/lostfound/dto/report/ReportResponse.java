@@ -13,4 +13,6 @@ public class ReportResponse {
     private Long id;
     private String message;
     private ItemResponse reportedItem;
+    
+    
 }

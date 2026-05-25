@@ -45,7 +45,7 @@ public class Report {
     @Column(nullable = false, length = 2000)
     private String message;
 
-    private String reportType; // "FOUND" or "CLAIM" or "LOST"
+    private String reportType; 
 
     private LocalDateTime createdAt = LocalDateTime.now();
 

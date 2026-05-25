@@ -41,7 +41,7 @@ List<ItemResponse> itemDtos = user.getItems() == null ? List.of(): user.getItems
        return itemDto;
     }).toList();
 
-    dto.setItems(itemDtos);
+
         return dto;
     }
 
