@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -56,14 +57,18 @@ private User user;
     @OneToMany(   mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Report> reports;
 
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Quiz> quizzes;
+
     @Column(nullable = false )
     private String name;
 
     @Column(nullable = false,  length = 2000)
     private String description;
 
-     @Column(nullable = false)
-    private String photoUrl;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> photos;
 
      @Enumerated(EnumType.STRING) 
      @Column(nullable = false)

@@ -133,6 +133,7 @@
  
 ```
 
+
 ## Future Improvements
  ```
  Email verification

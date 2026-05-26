@@ -51,7 +51,7 @@ private ItemResponse toDTO(Item item) {
 
     dto.setName(item.getName());
     dto.setDescription(item.getDescription());
-    dto.setPhotoUrl(item.getPhotoUrl());
+    dto.setPhotos(item.getPhotos());
    
     if (item.getUser() != null) {
         dto.setUserId(item.getUser().getId());
@@ -75,7 +75,7 @@ private ItemResponse toDTO(Item item) {
         Item item = new Item();
         item.setName(dto.getName());
         item.setDescription(dto.getDescription());
-        item.setPhotoUrl(dto.getPhotoUrl());
+        item.setPhotos(dto.getPhotos());
         item.setStatus(Status.FOUND);
 
         // User user = userRepository.findById(dto.getUserId())
@@ -187,7 +187,7 @@ Item item = itemRepository.findById(id)
 
    item.setName(dto.getName());
    item.setDescription(dto.getDescription());
-   item.setPhotoUrl(dto.getPhotoUrl());
+   item.setPhotos(dto.getPhotos());
    Item updated = itemRepository.save(item);
 
         return toDTO(updated);

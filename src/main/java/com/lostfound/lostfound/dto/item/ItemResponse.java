@@ -2,6 +2,7 @@ package com.lostfound.lostfound.dto.item;
 import com.lostfound.lostfound.model.Status;
 
 import lombok.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -11,7 +12,7 @@ public class ItemResponse {
     private Long id;
     private String name;
     private String description;
-    private String photoUrl;
+    private List<String> photos;
     private  Status status;
 
     private Long userId;
