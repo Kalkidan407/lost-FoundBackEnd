@@ -34,8 +34,8 @@ public class Location {
     private Long id;
     
     private String name;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
 
     @Column(name = "is_deleted")
     private boolean deleted = false;

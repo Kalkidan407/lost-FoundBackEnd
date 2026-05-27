@@ -17,7 +17,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAccessDenied(
             AccessDeniedException ex,
             HttpServletRequest request) {
-        
                 
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())

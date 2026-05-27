@@ -10,9 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LocationRequest {
  
-    private String  name;
-    private String longitude;
-    private String latitude;
+    private String name;
+    private Double longitude;
+    private Double latitude;
     
 
     
