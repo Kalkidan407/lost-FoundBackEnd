@@ -20,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class QuizService {
 
+    private static final String QUIZ_NOT_FOUND = "Quiz not found with id: ";
+
     private final QuizRepository quizRepository;
     private final ItemRepository itemRepository;
 
@@ -58,13 +60,16 @@ public class QuizService {
 
     public QuizResponse addQuiz(QuizRequest dto) {
         Quiz quiz = fromDTO(dto);
+        if (quiz == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quiz request must not be null");
+        }
         Quiz saved = quizRepository.save(quiz);
         return toDTO(saved);
     }
 
     public QuizResponse getQuizById(Long id) {
         Quiz quiz = quizRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Quiz not found with id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, QUIZ_NOT_FOUND + id));
         return toDTO(quiz);
     }
 
@@ -80,7 +85,7 @@ public class QuizService {
 
     public QuizResponse updateQuiz(Long id, QuizRequest updatedQuiz) {
         Quiz quiz = quizRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Quiz not found with id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, QUIZ_NOT_FOUND + id));
 
         quiz.setQuestion(updatedQuiz.getQuestion());
         quiz.setAnswer(updatedQuiz.getAnswer());
@@ -98,7 +103,7 @@ public class QuizService {
 
     public void deleteQuizById(Long id) {
         Quiz quiz = quizRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Quiz not found with id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, QUIZ_NOT_FOUND + id));
         quiz.setDeleted(true);
         quiz.setDeletedAt(LocalDateTime.now());
         quizRepository.save(quiz);
