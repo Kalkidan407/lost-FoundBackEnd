@@ -33,9 +33,26 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(nullable = false)
     private String name;
+    
+    @Column(nullable = false)
     private Double latitude;
+    
+    @Column(nullable = false)
     private Double longitude;
+    
+    @Column(length = 500)
+    private String address;
+    
+    @Column(length = 500)
+    private String description;
+    
+    @Column(length = 50)
+    private String timezone;
+    
+    @Column(name = "is_verified")
+    private boolean verified = false;
 
     @Column(name = "is_deleted")
     private boolean deleted = false;

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 import com.lostfound.lostfound.dto.location.LocationRequest;
 import com.lostfound.lostfound.dto.location.LocationResponse;
 import com.lostfound.lostfound.service.LocationService;
@@ -33,7 +35,7 @@ public class LocationController {
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
-    public LocationResponse createCategLocation(@RequestBody LocationRequest request){
+    public LocationResponse createCategLocation(@Valid @RequestBody LocationRequest request){
         return locationService.addLocation(request);
     }
 
@@ -71,7 +73,7 @@ public class LocationController {
     @PutMapping("/update/{id}")  
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ADMIN')")
-    public LocationResponse updateLocation(@PathVariable Long id, @RequestBody LocationRequest request){
+    public LocationResponse updateLocation(@PathVariable Long id, @Valid @RequestBody LocationRequest request){
         return locationService.updateLocation(id, request);
     }
 

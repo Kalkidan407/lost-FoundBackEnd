@@ -19,6 +19,10 @@ public class LocationResponse {
     private String name;
     private Double longitude;
     private Double latitude;
+    private String address;
+    private String description;
+    private String timezone;
+    private boolean verified;
     private List<ItemResponse> items;
 
     
