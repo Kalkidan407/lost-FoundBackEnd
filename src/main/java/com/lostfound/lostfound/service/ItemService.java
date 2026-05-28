@@ -24,6 +24,7 @@ import com.lostfound.lostfound.repository.ItemRepository;
 import com.lostfound.lostfound.repository.LocationRepository;
 import com.lostfound.lostfound.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 
@@ -99,6 +100,7 @@ private ItemResponse toDTO(Item item) {
 
     }
 
+    @Transactional
  @Cacheable(
         value = "items",
         key = "'all-items-' + #keyword + '-' + #page + '-' + #size"  
@@ -139,7 +141,7 @@ private ItemResponse toDTO(Item item) {
     }
 
 
-  
+  @Transactional
       @CacheEvict(value = {"items", "item"}, allEntries = true)  
     public  ItemResponse getItemById(Long id) {
         return itemRepository.findById(id)

@@ -8,7 +8,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+
 
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.dto.user.UserRequest;
@@ -17,9 +20,11 @@ import com.lostfound.lostfound.model.Role;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.repository.UserRepository;
 
+
 import lombok.RequiredArgsConstructor;
 
 @Service
+
 @RequiredArgsConstructor
 public class UserService {
     
@@ -71,7 +76,7 @@ private User fromDTO(UserRequest request) {
     //     return userRepository.findByUsername(username) != null;
     // }
     
-
+@Transactional
     public UserResponse getUsersById(Long id){
         User user = userRepository.findById(id)
                      .orElseThrow(() -> new ResponseStatusException( 
@@ -96,7 +101,7 @@ private User fromDTO(UserRequest request) {
     }
 
 
-
+@Transactional
      public List<UserResponse> getAllUser(){
         List<User> user = userRepository.findAll();
 

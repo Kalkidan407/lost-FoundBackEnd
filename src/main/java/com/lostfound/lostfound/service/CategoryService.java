@@ -14,6 +14,7 @@ import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.model.Category;
 import com.lostfound.lostfound.repository.CategoryRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -54,6 +55,7 @@ private Category fromDTO(CategoryRequest request){
   return category;
 }
 
+@Transactional
    @Cacheable("categories")
     public List<CategoryResponse> getAllCategories() {
        List<Category> category = categoryRepository.findAll();

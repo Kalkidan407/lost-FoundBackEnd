@@ -10,6 +10,9 @@ import com.lostfound.lostfound.dto.location.LocationRequest;
 import com.lostfound.lostfound.dto.location.LocationResponse;
 import com.lostfound.lostfound.model.Location;
 import com.lostfound.lostfound.repository.LocationRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.lostfound.lostfound.exception.ResourceNotFoundException;
 import com.lostfound.lostfound.exception.InvalidLocationException;
 import lombok.RequiredArgsConstructor;
@@ -86,12 +89,14 @@ public class LocationService {
        return toDTO(saved); 
    }
 
+   @Transactional
      @Cacheable("locations")  
    public List<LocationResponse> getAllLocations() {
        List<Location> locations = locationRepository.findAll();
        return locations.stream().map(this::toDTO).toList();
    }
 
+   @Transactional
      @Cacheable(value = "location", key = "#id")  
    public LocationResponse getLocationById(Long id) {
        if (id == null || id <= 0) {

@@ -16,6 +16,7 @@ import com.lostfound.lostfound.model.Quiz;
 import com.lostfound.lostfound.repository.ItemRepository;
 import com.lostfound.lostfound.repository.QuizRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -70,6 +71,7 @@ public class QuizService {
         return toDTO(saved);
     }
 
+@Transactional
       @Cacheable(value = "quiz", key = "#id")  
     public QuizResponse getQuizById(Long id) {
         Quiz quiz = quizRepository.findById(id)
@@ -77,14 +79,15 @@ public class QuizService {
         return toDTO(quiz);
     }
 
-     
+
+    @Transactional
       @CacheEvict(value = {"quizzes", "quiz", "quiz-by-item"}, allEntries = true)
     public List<QuizResponse> getAllQuiz() {
         List<Quiz> quizzes = quizRepository.findAll();
         return quizzes.stream().map(this::toDTO).toList();
     }
 
-  
+  @Transactional
      @Cacheable(value = "quiz-by-item", key = "#itemId")  
     public List<QuizResponse> getQuizByItemId(Long itemId) {
         List<Quiz> quizzes = quizRepository.findByItemId(itemId);

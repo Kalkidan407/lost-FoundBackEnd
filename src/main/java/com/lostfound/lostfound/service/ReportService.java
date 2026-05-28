@@ -2,7 +2,7 @@ package com.lostfound.lostfound.service;
 
 
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
@@ -11,10 +11,11 @@ import org.springframework.data.domain.Sort;
 import com.lostfound.lostfound.dto.report.ReportRequest;
 import com.lostfound.lostfound.dto.report.ReportResponse;
 import com.lostfound.lostfound.model.Item;
+
 import com.lostfound.lostfound.model.Report;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.repository.ItemRepository;
-import com.lostfound.lostfound.repository.LocationRepository;
+
 import com.lostfound.lostfound.repository.ReportRepository;
 import com.lostfound.lostfound.repository.UserRepository;
 
@@ -26,7 +27,6 @@ public class ReportService {
   
   private final ReportRepository reportRepository;
   private final UserRepository userRepository;
-  private final LocationRepository locationRepository;
   private final ItemRepository itemRepository;
 
   private ReportResponse toDTO(Report report) {
@@ -59,7 +59,7 @@ public class ReportService {
       return report;
   }
 
-
+@Transactional
   public Page<ReportResponse> getAllReports(String keyword, int page, int size) {
      int maxSize = 12;
      int safeSize = Math.min(size, maxSize);
@@ -119,6 +119,7 @@ if( keyword != null && !keyword.trim().isEmpty()){
     return toDTO(saved);
 }
 
+@Transactional
 public ReportResponse getReportById(Long id) {
     return reportRepository.findById(id)
             .map(this::toDTO)
