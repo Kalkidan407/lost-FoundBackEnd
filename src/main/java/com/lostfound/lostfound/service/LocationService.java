@@ -1,6 +1,9 @@
 package com.lostfound.lostfound.service;
 
 import java.util.List;
+
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.lostfound.lostfound.dto.item.ItemResponse;
 import com.lostfound.lostfound.dto.location.LocationRequest;
@@ -17,7 +20,7 @@ public class LocationService {
     
    private final LocationRepository locationRepository;
 
-   private void validateLocationCoordinates(Double latitude, Double longitude, String name) {
+   private void validateLocationCoordinates( Double latitude, Double longitude, String name) {
        if (latitude == null || longitude == null) {
            throw new InvalidLocationException("Latitude and longitude are required");
        }
@@ -76,17 +79,20 @@ public class LocationService {
        return location;
    }
 
+    @CacheEvict(value = "locations", allEntries = true)
    public LocationResponse addLocation(LocationRequest dto) {
        Location location = fromDTO(dto); 
        Location saved = locationRepository.save(location);
        return toDTO(saved); 
    }
 
+     @Cacheable("locations")  
    public List<LocationResponse> getAllLocations() {
        List<Location> locations = locationRepository.findAll();
        return locations.stream().map(this::toDTO).toList();
    }
 
+     @Cacheable(value = "location", key = "#id")  
    public LocationResponse getLocationById(Long id) {
        if (id == null || id <= 0) {
            throw new InvalidLocationException("Invalid location ID");
@@ -96,6 +102,8 @@ public class LocationService {
        return toDTO(location);
    }
 
+
+   @CacheEvict(value = {"locations", "location"}, allEntries = true)  
    public void deleteLocationById(Long id) {
        if (id == null || id <= 0) {
            throw new InvalidLocationException("Invalid location ID");
@@ -107,6 +115,7 @@ public class LocationService {
        locationRepository.save(location);
    }
 
+    @CacheEvict(value = {"locations", "location"}, allEntries = true)  
    public void deleteAllLocations() {
        locationRepository.findAll().forEach(location -> {
            location.setDeleted(true);
@@ -115,7 +124,10 @@ public class LocationService {
        });
    }
 
-   public LocationResponse updateLocation(Long id, LocationRequest updateedLocation) {
+
+ @CacheEvict(value = {"locations", "location"}, allEntries = true)  
+   public LocationResponse updateLocation(Long id, LocationRequest updatedLocation) {
+
        if (id == null || id <= 0) {
            throw new InvalidLocationException("Invalid location ID");
        }
@@ -123,17 +135,19 @@ public class LocationService {
        Location location = locationRepository.findById(id)
                .orElseThrow(() -> new ResourceNotFoundException("Location not found with id: " + id));
 
-       validateLocationCoordinates(updateedLocation.getLatitude(), updateedLocation.getLongitude(), updateedLocation.getName());
+       validateLocationCoordinates(updatedLocation.getLatitude(), updatedLocation.getLongitude(), updatedLocation.getName());
        
-       location.setName(updateedLocation.getName().trim());
-       location.setLatitude(updateedLocation.getLatitude());
-       location.setLongitude(updateedLocation.getLongitude());
-       location.setAddress(updateedLocation.getAddress());
-       location.setDescription(updateedLocation.getDescription());
-       location.setTimezone(updateedLocation.getTimezone());
+       location.setName(updatedLocation.getName().trim());
+       location.setLatitude(updatedLocation.getLatitude());
+       location.setLongitude(updatedLocation.getLongitude());
+       location.setAddress(updatedLocation.getAddress());
+       location.setDescription(updatedLocation.getDescription());
+       location.setTimezone(updatedLocation.getTimezone());
     
        Location save = locationRepository.save(location);
 
        return toDTO(save);
    }
+
+
 }

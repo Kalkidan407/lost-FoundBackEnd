@@ -8,7 +8,7 @@ import com.lostfound.lostfound.dto.*;
 import com.lostfound.lostfound.model.Role;
 import com.lostfound.lostfound.model.User;
 import com.lostfound.lostfound.refresh.RefreshToken;
-import com.lostfound.lostfound.refresh.RefreshTokenRepository;
+
 import com.lostfound.lostfound.refresh.RefreshTokenService;
 import com.lostfound.lostfound.repository.UserRepository;
 import com.lostfound.lostfound.security.JwtService;

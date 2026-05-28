@@ -2,6 +2,8 @@ package com.lostfound.lostfound.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -97,7 +99,10 @@ private ItemResponse toDTO(Item item) {
 
     }
 
-
+ @Cacheable(
+        value = "items",
+        key = "'all-items-' + #keyword + '-' + #page + '-' + #size"  
+    )
    public Page<ItemResponse> getAllItems( String keyword, int page, int size ) {
 
     int maxSize = 20;
@@ -108,7 +113,7 @@ private ItemResponse toDTO(Item item) {
     Pageable pageable = PageRequest.of(
             page,
             safeSize,
-            Sort.by("id").descending() 
+            Sort.by("id").descending()
     );
 
     if (keyword != null && !keyword.trim().isEmpty()) {
@@ -123,7 +128,7 @@ private ItemResponse toDTO(Item item) {
 
 }
 
-
+@CacheEvict(value = "items", allEntries = true) 
     public ItemResponse addItem(ItemRequest dto) {
       User currentUser = getCurrentUser();
 
@@ -133,6 +138,9 @@ private ItemResponse toDTO(Item item) {
         return toDTO(savedItem);
     }
 
+
+  
+      @CacheEvict(value = {"items", "item"}, allEntries = true)  
     public  ItemResponse getItemById(Long id) {
         return itemRepository.findById(id)
                 .map(this::toDTO)
@@ -163,7 +171,7 @@ private ItemResponse toDTO(Item item) {
     itemRepository.save(item);
 }
 
- 
+   @CacheEvict(value = {"items", "item"}, allEntries = true)  
     public void deleteAllItems(){
         itemRepository.findAll().forEach(item -> {
             item.setDeleted(true);
@@ -172,7 +180,9 @@ private ItemResponse toDTO(Item item) {
         });
     }
 
-public ItemResponse updateItem(Long id, ItemRequest dto){
+
+   @CacheEvict(value = {"items", "item"}, allEntries = true)  
+ public ItemResponse updateItem(Long id, ItemRequest dto) {
 
 Item item = itemRepository.findById(id)
           .orElseThrow(() -> new RuntimeException("Item not found"));

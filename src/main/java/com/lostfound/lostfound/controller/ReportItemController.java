@@ -1,10 +1,10 @@
 package com.lostfound.lostfound.controller;
 
-import java.util.List;
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ import com.lostfound.lostfound.service.ReportService;
 import lombok.RequiredArgsConstructor;
 
  import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 
 @RestController
 @RequiredArgsConstructor

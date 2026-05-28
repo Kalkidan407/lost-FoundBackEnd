@@ -2,6 +2,8 @@ package com.lostfound.lostfound.service;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -42,6 +44,7 @@ private CategoryResponse toDTO(Category category){
 
 
 private Category fromDTO(CategoryRequest request){
+
   if(request == null){
     return null;
   }
@@ -51,19 +54,23 @@ private Category fromDTO(CategoryRequest request){
   return category;
 }
 
-
+   @Cacheable("categories")
     public List<CategoryResponse> getAllCategories() {
        List<Category> category = categoryRepository.findAll();
     return category.stream().map( this:: toDTO).toList();
         
     }
 
+      
+    @CacheEvict(value = "categories", allEntries = true)
     public CategoryResponse addCategory(CategoryRequest dto) {
       Category category = fromDTO(dto);
       Category saved = categoryRepository.save(category);
         return toDTO(saved);
     }
     
+
+      @CacheEvict(value = "categories", allEntries = true) 
     public void deleteCategoryById(Long id){
       Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found with id: " + id));
@@ -72,6 +79,8 @@ private Category fromDTO(CategoryRequest request){
       categoryRepository.save(category);
     }
 
+
+    @CacheEvict(value = "categories", allEntries = true)
     public void deleteAllCategories(){
       categoryRepository.findAll().forEach(category -> {
         category.setDeleted(true);
@@ -81,7 +90,7 @@ private Category fromDTO(CategoryRequest request){
     }
 
     
-
+ @CacheEvict(value = "categories", allEntries = true) 
  public CategoryResponse updateCategory(Long id, CategoryRequest updatedCategory) {
      Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException( HttpStatus.NOT_FOUND,"Category entity not found with id" + id));

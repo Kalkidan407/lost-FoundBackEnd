@@ -1,7 +1,5 @@
 package com.lostfound.lostfound.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +10,6 @@ import org.springframework.data.domain.Sort;
 
 import com.lostfound.lostfound.dto.report.ReportRequest;
 import com.lostfound.lostfound.dto.report.ReportResponse;
-import com.lostfound.lostfound.dto.user.UserResponse;
 import com.lostfound.lostfound.model.Item;
 import com.lostfound.lostfound.model.Report;
 import com.lostfound.lostfound.model.User;
@@ -61,12 +58,6 @@ public class ReportService {
 
       return report;
   }
-
-
-
-   // --------------------------
-    // Service Methods
-    // --------------------------
 
 
   public Page<ReportResponse> getAllReports(String keyword, int page, int size) {

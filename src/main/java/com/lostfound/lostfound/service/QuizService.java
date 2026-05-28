@@ -3,6 +3,8 @@ package com.lostfound.lostfound.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -58,6 +60,7 @@ public class QuizService {
         return quiz;
     }
 
+    @CacheEvict(value = {"quizzes", "quiz", "quiz-by-item"}, allEntries = true)
     public QuizResponse addQuiz(QuizRequest dto) {
         Quiz quiz = fromDTO(dto);
         if (quiz == null) {
@@ -67,22 +70,28 @@ public class QuizService {
         return toDTO(saved);
     }
 
+      @Cacheable(value = "quiz", key = "#id")  
     public QuizResponse getQuizById(Long id) {
         Quiz quiz = quizRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, QUIZ_NOT_FOUND + id));
         return toDTO(quiz);
     }
 
+     
+      @CacheEvict(value = {"quizzes", "quiz", "quiz-by-item"}, allEntries = true)
     public List<QuizResponse> getAllQuiz() {
         List<Quiz> quizzes = quizRepository.findAll();
         return quizzes.stream().map(this::toDTO).toList();
     }
 
+  
+     @Cacheable(value = "quiz-by-item", key = "#itemId")  
     public List<QuizResponse> getQuizByItemId(Long itemId) {
         List<Quiz> quizzes = quizRepository.findByItemId(itemId);
         return quizzes.stream().map(this::toDTO).toList();
     }
 
+  @CacheEvict(value = {"quizzes", "quiz", "quiz-by-item"}, allEntries = true)
     public QuizResponse updateQuiz(Long id, QuizRequest updatedQuiz) {
         Quiz quiz = quizRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, QUIZ_NOT_FOUND + id));
@@ -101,6 +110,7 @@ public class QuizService {
         return toDTO(saved);
     }
 
+     @CacheEvict(value = {"quizzes", "quiz", "quiz-by-item"}, allEntries = true)
     public void deleteQuizById(Long id) {
         Quiz quiz = quizRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, QUIZ_NOT_FOUND + id));
@@ -109,6 +119,7 @@ public class QuizService {
         quizRepository.save(quiz);
     }
 
+    @CacheEvict(value = {"quizzes", "quiz", "quiz-by-item"}, allEntries = true)
     public void deleteAllQuiz() {
         quizRepository.findAll().forEach(quiz -> {
             quiz.setDeleted(true);
