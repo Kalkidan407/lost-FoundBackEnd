@@ -63,12 +63,14 @@ public class QuizService {
 
     @CacheEvict(value = {"quizzes", "quiz", "quiz-by-item"}, allEntries = true)
     public QuizResponse addQuiz(QuizRequest dto) {
+
         Quiz quiz = fromDTO(dto);
         if (quiz == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quiz request must not be null");
         }
         Quiz saved = quizRepository.save(quiz);
         return toDTO(saved);
+        
     }
 
 @Transactional
