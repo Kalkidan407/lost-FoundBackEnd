@@ -18,8 +18,9 @@ public class CacheConfig {
             "items",
             "users",
             "locations",
-            "quizzes"
-
+            "quizzes",
+            "quiz",
+            "quiz-by-item"
           
         );
     }
