@@ -57,5 +57,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Report> reports;
+    
 
 }

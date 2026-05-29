@@ -80,6 +80,7 @@ public class LocationService {
        location.setVerified(false);
 
        return location;
+       
    }
 
     @CacheEvict(value = "locations", allEntries = true)
