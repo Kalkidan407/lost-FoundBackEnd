@@ -2,6 +2,7 @@ package com.lostfound.lostfound.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import com.lostfound.lostfound.model.Item;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
