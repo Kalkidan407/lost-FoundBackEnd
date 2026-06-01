@@ -158,7 +158,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
     <artifactId>bucket4j-core</artifactId>
     <version>7.6.0</version>
 </dependency>
-
+<!-- 
 <dependency>
     <groupId>org.flywaydb</groupId>
     <artifactId>flyway-core</artifactId>
@@ -167,7 +167,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 <dependency>
     <groupId>org.flywaydb</groupId>
     <artifactId>flyway-database-postgresql</artifactId>
-</dependency>
+</dependency> -->
 
 </dependencies>
 
