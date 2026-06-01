@@ -20,8 +20,7 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +51,7 @@ public class QuizGenerationService {
 		if (item == null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Item data is invalid");
 		}
+		
 	}
 
 	private String buildItemDetailsForAnalysis(Item item) {
