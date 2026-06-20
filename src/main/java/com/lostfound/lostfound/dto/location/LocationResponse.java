@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 public class LocationResponse {
     private Long id;
     private String name;
-    private Double longitude;
-    private Double latitude;
+    private String longitude;
+    private String latitude;
     private String address;
     private String description;
     private String timezone;

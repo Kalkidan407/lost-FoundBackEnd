@@ -36,10 +36,10 @@ public class Location {
     private String name;
     
     @Column(nullable = false)
-    private Double latitude;
+    private String latitude;
     
     @Column(nullable = false)
-    private Double longitude;
+    private String longitude;
     
     @Column(length = 500)
     private String address;
