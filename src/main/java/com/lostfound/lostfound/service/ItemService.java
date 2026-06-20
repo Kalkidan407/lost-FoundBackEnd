@@ -111,7 +111,6 @@ private ItemResponse toDTO(Item item) {
     int safeSize = Math.min(size, maxSize);
 
     Page<Item> items;
-
     Pageable pageable = PageRequest.of(
             page,
             safeSize,
@@ -133,7 +132,6 @@ private ItemResponse toDTO(Item item) {
 @CacheEvict(value = "items", allEntries = true) 
     public ItemResponse addItem(ItemRequest dto) {
       User currentUser = getCurrentUser();
-
         Item item = fromDTO(dto);
          item.setUser(currentUser);
         Item savedItem = itemRepository.save(item);

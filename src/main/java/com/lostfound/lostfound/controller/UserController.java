@@ -41,8 +41,6 @@ public UserResponse createUser(@Valid @RequestBody UserRequest user) {
 }
 
 
-
-
 @GetMapping("/id/{id}")
 @ResponseStatus(HttpStatus.OK)
 @PreAuthorize("isAuthenticated()")
@@ -54,7 +52,9 @@ public UserResponse getUserById(@PathVariable Long id) {
 @ResponseStatus(HttpStatus.OK)
 @PreAuthorize("isAuthenticated()")
 public UserResponse getUserByUsername(@PathVariable String name) {
+
     return userService.getUserByUsername(name);
+    
 }
 
   @DeleteMapping("/delete/{id}")
