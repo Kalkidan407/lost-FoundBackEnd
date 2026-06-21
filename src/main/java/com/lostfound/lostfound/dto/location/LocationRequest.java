@@ -25,7 +25,7 @@ public class LocationRequest {
     @NotNull(message = "Latitude is required")
     @Min(value = -90, message = "Latitude must be between -90 and 90")
     @Max(value = 90, message = "Latitude must be between -90 and 90")
-    private Double latitude;
+    private  Double latitude;
     
     @Size(max = 500, message = "Address must not exceed 500 characters")
     private String address;
